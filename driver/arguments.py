@@ -72,9 +72,15 @@ def parse_args():
 
     parser.add_argument('-testsearch', action='store_true', help='Tests search for a given problem.')
 
-    parser.add_argument('-constrastive', action='store_true', help='Enables contrastive axioms encoding.')
+    parser.add_argument('-contrastive', action='store_true', help='Enables contrastive axioms encoding.')
     
     parser.add_argument('-axiom', type=int, default=1, help='Contrastive axiom to use')
+    
+    parser.add_argument('-first_action', help='First action to consider in contrastive axiom encoding', type=ascii)
+
+    parser.add_argument('-second_action', help='Second action to consider in contrastive axiom encoding', type=ascii)
+    
+    parser.add_argument('-step', type=int, default=0, help='Step of encoded action for axioms 3 and 4')
 
     args = parser.parse_args()
 

@@ -257,7 +257,6 @@ class Encoder:
         new_actions = []
         for step in range(self.horizon):
             for action in self.ground_problem.actions:
-                print(action.name)
                 # Append preconditions
                 for pre in action.preconditions:
                     precondition = utils.inorderTraverse(pre, self.problem_z3_variables, step, self.problem_constant_numerics)
@@ -718,9 +717,12 @@ class EncoderSMTContrastive(EncoderSMT):
     """
     Class that defines method to build SMT encoding.
     """
-    def __init__(self, task, modifier, axiom, first_action, second_action, step):
+    def __init__(self, task, modifier, first_action, second_action, step, axiom=1):
         super().__init__(task, modifier)
         self.axiom_num = axiom
+        first_action = first_action.replace('\'', '')
+        if second_action is not None:
+            second_action = second_action.replace('\'', '')
         for action in self.ground_problem.actions:
             if action.name == first_action:
                 self.first_action = action.name
@@ -736,6 +738,8 @@ class EncoderSMTContrastive(EncoderSMT):
             foil_actions.append(z3.Not(self.action_variables[step][self.first_action]))
         fact_enc.append(z3.Or(fact_actions))
         foil_enc.append(z3.And(foil_actions))
+        print(fact_enc)
+        print(foil_enc)
         return fact_enc, foil_enc
     
     def encode(self, horizon):
@@ -781,7 +785,7 @@ class EncoderSMTContrastive(EncoderSMT):
         
         # Encode first axiom encoding
         
-        formula['axiom'] = self.encode_first_axiom(self.first_action)
+        formula['axiom'] = self.encode_first_axiom()
 
         return formula
 

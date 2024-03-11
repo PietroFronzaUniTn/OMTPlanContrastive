@@ -125,14 +125,25 @@ def main(BASE_DIR):
         if args.parallel:
             print('\nWarning: optimal planning not supported for this configuration')
             print('Continue with satisficing planning...\n')
-        
-        e = encoder.EncoderSMT(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier())
+            
+        if args.contrastive:
+            axiom = args.axiom
+            first_action = args.first_action
+            second_action = args.second_action
+            step = args.step
+            e = encoder.EncoderSMTContrastive(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier(), first_action, second_action, step, axiom)
+        else:     
+            e = encoder.EncoderSMT(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier())
 
         # Build SMT-LIB encoding and dump (no solving)
         if args.translate:
             formula = e.encode(args.translate)
             # Print SMT planning formula (linear) to file
-            utils.printSMTFormula(formula,task.name, BASE_DIR)
+            if args.contrastive:
+                utils.printSMTFactFormula(formula, task.name, BASE_DIR)
+                utils.printSMTFoilFormula(formula, task.name, BASE_DIR)
+            else:               
+                utils.printSMTFormula(formula,task.name, BASE_DIR)
         else:
             # Ramp-up search for optimal planning with unit costs
             s = search.SearchSMT(e, args.b)
