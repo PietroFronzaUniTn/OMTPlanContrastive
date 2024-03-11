@@ -253,11 +253,11 @@ class Encoder:
         return utils.inorderTraverse(self.ground_problem.goals, self.problem_z3_variables, self.horizon, self.problem_constant_numerics)
         
     def encodeActions(self):
-
         actions = []
         new_actions = []
         for step in range(self.horizon):
             for action in self.ground_problem.actions:
+                print(action.name)
                 # Append preconditions
                 for pre in action.preconditions:
                     precondition = utils.inorderTraverse(pre, self.problem_z3_variables, step, self.problem_constant_numerics)
@@ -713,7 +713,77 @@ class EncoderOMT(Encoder):
         formula['oin'] = self.encodeOnlyIfNeeded()
 
         return formula
+    
+class EncoderSMTContrastive(EncoderSMT):
+    """
+    Class that defines method to build SMT encoding.
+    """
+    def __init__(self, task, modifier, axiom, first_action, second_action, step):
+        super().__init__(task, modifier)
+        self.axiom_num = axiom
+        for action in self.ground_problem.actions:
+            if action.name == first_action:
+                self.first_action = action.name
+            if action.name == second_action:
+                self.second_action = action.name
+        self.step = step
+        
+    
+    def encode_first_axiom(self):
+        fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
+        for step in range(self.horizon):
+            fact_actions.append(self.action_variables[step][self.first_action])
+            foil_actions.append(z3.Not(self.action_variables[step][self.first_action]))
+        fact_enc.append(z3.Or(fact_actions))
+        foil_enc.append(z3.And(foil_actions))
+        return fact_enc, foil_enc
+    
+    def encode(self, horizon):
+        """!
+        Builds SMT encoding for the first contrastive axiom.
 
+        @param horizon: horizon for bounded planning formula.
+        @return formula: dictionary containing subformulas.
+        """
+
+        # initialize horizon
+        self.horizon = horizon
+
+        # set the planner name.
+        self.name = "smt"
+
+        # Create variables
+        self.createVariables()
+
+        # Start encoding formula
+
+        formula = defaultdict(list)
+
+        # Encode initial state axioms
+
+        formula['initial'] = self.encodeInitialState()
+
+        # Encode goal state axioms
+
+        formula['goal'] = self.encodeGoalState()
+
+        # Encode universal axioms
+
+        formula['actions'] = self.encodeActions()
+
+        # Encode explanatory frame axioms
+
+        formula['frame'] = self.encodeFrame()
+
+        # Encode execution semantics (lin/par)
+
+        formula['sem'] = self.encodeExecutionSemantics()
+        
+        # Encode first axiom encoding
+        
+        formula['axiom'] = self.encode_first_axiom(self.first_action)
+
+        return formula
 
 class R2EEncoding:
     def __init__(self, task, dump_models = False) -> None:
