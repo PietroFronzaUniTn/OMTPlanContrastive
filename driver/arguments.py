@@ -72,6 +72,9 @@ def parse_args():
 
     parser.add_argument('-testsearch', action='store_true', help='Tests search for a given problem.')
 
+    parser.add_argument('-constrastive', action='store_true', help='Enables contrastive axioms encoding.')
+    
+    parser.add_argument('-axiom', type=int, default=1, help='Contrastive axiom to use')
 
     args = parser.parse_args()
 
