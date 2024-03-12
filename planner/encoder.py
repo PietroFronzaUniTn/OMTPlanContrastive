@@ -720,7 +720,10 @@ class EncoderSMTContrastive(EncoderSMT):
     def __init__(self, task, modifier, first_action, second_action, step, axiom=1):
         super().__init__(task, modifier)
         self.axiom_num = axiom
-        first_action = first_action.replace('\'', '')
+        assert self.axiom_num in range(1,5), "Axiom number should be within 1 and 4."
+        self.first_action, self.second_action = None, None
+        if first_action is not None:
+            first_action = first_action.replace('\'', '')
         if second_action is not None:
             second_action = second_action.replace('\'', '')
         for action in self.ground_problem.actions:
@@ -729,8 +732,12 @@ class EncoderSMTContrastive(EncoderSMT):
             if action.name == second_action:
                 self.second_action = action.name
         self.step = step
-        
-    
+        # TODO: Add check for existance of actions in the ground_action dictionary
+        assert self.first_action is not None, "To use a constrastive axiom you need at least one action."
+        if self.axiom_num == 3 or self.axiom_num == 4:
+            assert self.second_action is not None, "Must have second action with axioms 3 and 4."
+            assert self.step is not None, "Must have step of action with axioms 3 and 4."
+                
     def encode_first_axiom(self):
         fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
         for step in range(self.horizon):
@@ -738,8 +745,30 @@ class EncoderSMTContrastive(EncoderSMT):
             foil_actions.append(z3.Not(self.action_variables[step][self.first_action]))
         fact_enc.append(z3.Or(fact_actions))
         foil_enc.append(z3.And(foil_actions))
-        print(fact_enc)
-        print(foil_enc)
+        return fact_enc, foil_enc
+    
+    def encode_second_axiom(self):
+        fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
+        for step in range(self.horizon):
+            fact_actions.append(z3.Not(self.action_variables[step][self.first_action]))
+            foil_actions.append(self.action_variables[step][self.first_action])
+        fact_enc.append(z3.Or(fact_actions))
+        foil_enc.append(z3.And(foil_actions))
+        return fact_enc, foil_enc
+    
+    def encode_third_axiom(self):
+        assert self.step <= self.horizon and self.step >= 0, "Step of plan execution too high."
+        fact_enc, foil_enc = [],[]
+        fact_enc.append(self.action_variables[self.step][self.first_action])
+        foil_enc.append(self.action_variables[self.step][self.second_action])
+        return fact_enc, foil_enc
+    
+    def encode_fourth_axiom(self):
+        assert self.step < self.horizon and self.step >= 0, "Step of plan execution too high. For axiom 4 the step number shuold be smaller than the horizon."
+        if self.step == self.horizon: return [],[]
+        fact_enc, foil_enc = [],[]
+        fact_enc.append(z3.And(self.action_variables[self.step][self.first_action],self.action_variables[self.step+1][self.second_action]))
+        foil_enc.append(z3.And(self.action_variables[self.step][self.second_action],self.action_variables[self.step+1][self.first_action]))
         return fact_enc, foil_enc
     
     def encode(self, horizon):
@@ -784,8 +813,14 @@ class EncoderSMTContrastive(EncoderSMT):
         formula['sem'] = self.encodeExecutionSemantics()
         
         # Encode first axiom encoding
-        
-        formula['axiom'] = self.encode_first_axiom()
+        if self.axiom_num == 1:
+            formula['axiom'] = self.encode_first_axiom()
+        elif self.axiom_num == 2:
+            formula['axiom'] = self.encode_second_axiom()
+        elif self.axiom_num == 3:
+            formula['axiom'] = self.encode_third_axiom()
+        elif self.axiom_num == 4:
+            formula['axiom'] = self.encode_fourth_axiom()
 
         return formula
 
