@@ -140,8 +140,8 @@ def main(BASE_DIR):
             formula = e.encode(args.translate)
             # Print SMT planning formula (linear) to file
             if args.contrastive:
-                utils.printSMTFactFormula(formula, task.name, BASE_DIR)
-                utils.printSMTFoilFormula(formula, task.name, BASE_DIR)
+                utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "fact")
+                utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "foil")
             else:               
                 utils.printSMTFormula(formula,task.name, BASE_DIR)
         else:

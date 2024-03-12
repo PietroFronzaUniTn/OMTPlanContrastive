@@ -340,12 +340,13 @@ def printSMTFormula(formula,problem_name, dump_to_dir):
         with open(os.path.join(dump_to_dir,'{}.smt2').format(problem_name),'w') as fo:
             fo.write(solver.to_smt2())
             
-def printSMTFactFormula(formula,problem_name, dump_to_dir):
+def printSMTContrastiveFormula(formula,problem_name, dump_to_dir, contrastive_type = "fact"):
         """!
         Prints SMT planning formula in SMT-LIB syntax.
 
         @param formula
         @param problem_name
+        @param contrastive_type
         """
 
         print('Printing SMT formula to {}.smt2'.format(problem_name))
@@ -355,34 +356,19 @@ def printSMTFactFormula(formula,problem_name, dump_to_dir):
         # Assert subformulas in solver
         for name, sub_formula in formula.items():
             if name=="axiom":
-                solver.add(sub_formula[0])
+                if contrastive_type == "fact":
+                    solver.add(sub_formula[0])
+                elif contrastive_type == "foil":
+                    solver.add(sub_formula[1])
             else:
                 solver.add(sub_formula)
 
-        with open(os.path.join(dump_to_dir,'{}_fact.smt2').format(problem_name),'w') as fo:
-            fo.write(solver.to_smt2())
-
-def printSMTFoilFormula(formula,problem_name, dump_to_dir):
-        """!
-        Prints SMT planning formula in SMT-LIB syntax.
-
-        @param formula
-        @param problem_name
-        """
-
-        print('Printing SMT formula to {}.smt2'.format(problem_name))
-
-        solver = Solver()
-
-        # Assert subformulas in solver
-        for name, sub_formula in formula.items():
-            if name=="axiom":
-                solver.add(sub_formula[1])
-            else:
-                solver.add(sub_formula)
-
-        with open(os.path.join(dump_to_dir,'{}_foil.smt2').format(problem_name),'w') as fo:
-            fo.write(solver.to_smt2())
+        if contrastive_type == "fact":
+            with open(os.path.join(dump_to_dir,'{}_fact.smt2').format(problem_name),'w') as fo:
+                fo.write(solver.to_smt2())
+        elif contrastive_type == "foil":
+            with open(os.path.join(dump_to_dir,'{}_foil.smt2').format(problem_name),'w') as fo:
+                fo.write(solver.to_smt2())
 
 def printOMTFormula(formula,problem_name, dump_to_dir):
         """!
