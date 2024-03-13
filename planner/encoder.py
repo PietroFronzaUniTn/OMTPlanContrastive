@@ -732,11 +732,10 @@ class EncoderSMTContrastive(EncoderSMT):
             if action.name == second_action:
                 self.second_action = action.name
         self.step = step
-        # TODO: Add check for existance of actions in the ground_action dictionary
-        assert self.first_action is not None, "To use a constrastive axiom you need at least one action."
+        assert self.first_action is not None, "In order to use the contrastive version of OMTPlan you need at least one valid action for the domain used."
         if self.axiom_num == 3 or self.axiom_num == 4:
-            assert self.second_action is not None, "Must have second action with axioms 3 and 4."
-            assert self.step is not None, "Must have step of action with axioms 3 and 4."
+            assert self.second_action is not None, "In order to encode axioms 3 and 4 in the contrastive version of OMTPlan you need also a second valid action for the domain used."
+            assert self.step is not None, "Axioms 3 and 4 also need the step number at which the first action takes place"
                 
     def encode_first_axiom(self):
         fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
@@ -757,14 +756,14 @@ class EncoderSMTContrastive(EncoderSMT):
         return fact_enc, foil_enc
     
     def encode_third_axiom(self):
-        assert self.step <= self.horizon and self.step >= 0, "Step of plan execution too high."
+        assert self.step <= self.horizon and self.step >= 0, "The step number for axiom 3 has to be between 0 and horizon"
         fact_enc, foil_enc = [],[]
         fact_enc.append(self.action_variables[self.step][self.first_action])
         foil_enc.append(self.action_variables[self.step][self.second_action])
         return fact_enc, foil_enc
     
     def encode_fourth_axiom(self):
-        assert self.step < self.horizon and self.step >= 0, "Step of plan execution too high. For axiom 4 the step number shuold be smaller than the horizon."
+        assert self.step < self.horizon and self.step >= 0, "The step number for axiom 4 has to be between 0 and the horizon, last one excluded."
         if self.step == self.horizon: return [],[]
         fact_enc, foil_enc = [],[]
         fact_enc.append(z3.And(self.action_variables[self.step][self.first_action],self.action_variables[self.step+1][self.second_action]))
