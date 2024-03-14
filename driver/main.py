@@ -142,6 +142,8 @@ def main(BASE_DIR):
             if args.contrastive:
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "fact")
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "foil")
+                utils.model_counting(formula, "fact")
+                utils.model_counting(formula, "foil")
             else:               
                 utils.printSMTFormula(formula,task.name, BASE_DIR)
         else:

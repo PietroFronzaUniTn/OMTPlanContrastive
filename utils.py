@@ -555,5 +555,36 @@ def get_planning_problems(BASE_DIR):
 
     return planning_problems
 
+def model_counting(formula, contrastive_type="fact"):
+    def all_smt(s, initial_terms):
+        def block_term(s, m, t):
+            s.add(t != m.eval(t, model_completion=True))
+        def fix_term(s, m, t):
+            s.add(t == m.eval(t, model_completion=True))
+        def all_smt_rec(terms):
+            if sat == s.check():
+                m = s.model()
+                yield m
+                for i in range(len(terms)):
+                    s.push()
+                    block_term(s, m, terms[i])
+                    for j in range(i):
+                        fix_term(s, m, terms[j])
+                    yield from all_smt_rec(terms[i:])
+                    s.pop()   
+        yield from all_smt_rec(list(initial_terms))
+    
+    solver = Solver()
 
-
+    # Assert subformulas in solver
+    for name, sub_formula in formula.items():
+        if name=="axiom":
+            if contrastive_type == "fact":
+                solver.add(sub_formula[0])
+            elif contrastive_type == "foil":
+                solver.add(sub_formula[1])
+        else:
+            solver.add(sub_formula)
+    
+    models = list(all_smt(solver, formula['initial']))
+    print("Number of satisfiable models for {} model: ".format(contrastive_type), len(models))
