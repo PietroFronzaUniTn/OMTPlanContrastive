@@ -142,8 +142,14 @@ def main(BASE_DIR):
             if args.contrastive:
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "fact")
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "foil")
-                utils.model_counting(formula, "fact")
-                utils.model_counting(formula, "foil")
+                fact_support = utils.model_counting(formula, "fact")
+                foil_support = utils.model_counting(formula, "foil")
+                if(fact_support!=0):
+                    robustness = foil_support/fact_support
+                    print("Robustness measure: ", robustness)
+                else:
+                    robustness = -1
+                    print("Something went wrong. Fact support is empty.")
             else:               
                 utils.printSMTFormula(formula,task.name, BASE_DIR)
         else:

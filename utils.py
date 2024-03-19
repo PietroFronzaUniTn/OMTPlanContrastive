@@ -586,5 +586,6 @@ def model_counting(formula, contrastive_type="fact"):
         else:
             solver.add(sub_formula)
     
-    models = list(all_smt(solver, formula['initial']))
-    print("Number of satisfiable models for {} model: ".format(contrastive_type), len(models))
+    support = list(all_smt(solver, formula['initial']))
+    print("Size of {} support: ".format(contrastive_type), len(support))
+    return len(support)

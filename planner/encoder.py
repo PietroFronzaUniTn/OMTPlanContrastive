@@ -740,17 +740,17 @@ class EncoderSMTContrastive(EncoderSMT):
     def encode_first_axiom(self):
         fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
         for step in range(self.horizon):
-            fact_actions.append(self.action_variables[step][self.first_action])
-            foil_actions.append(z3.Not(self.action_variables[step][self.first_action]))
-        fact_enc.append(z3.Or(fact_actions))
-        foil_enc.append(z3.And(foil_actions))
+            fact_actions.append(z3.Not(self.action_variables[step][self.first_action]))
+            foil_actions.append(self.action_variables[step][self.first_action])
+        fact_enc.append(z3.And(fact_actions))
+        foil_enc.append(z3.Or(foil_actions))
         return fact_enc, foil_enc
     
     def encode_second_axiom(self):
         fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
         for step in range(self.horizon):
-            fact_actions.append(z3.Not(self.action_variables[step][self.first_action]))
-            foil_actions.append(self.action_variables[step][self.first_action])
+            fact_actions.append(self.action_variables[step][self.first_action])
+            foil_actions.append(z3.Not(self.action_variables[step][self.first_action]))
         fact_enc.append(z3.Or(fact_actions))
         foil_enc.append(z3.And(foil_actions))
         return fact_enc, foil_enc
