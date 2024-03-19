@@ -719,25 +719,41 @@ class EncoderSMTContrastive(EncoderSMT):
     """
     def __init__(self, task, modifier, first_action, second_action, step, axiom=1):
         super().__init__(task, modifier)
+        
+        # Get axiom number and check if it can encode a feasible value
         self.axiom_num = axiom
         assert self.axiom_num in range(1,5), "Axiom number should be within 1 and 4."
+        
+        # Get first and second actions from user
         self.first_action, self.second_action = None, None
+        # Remove single quotes from inputs
         if first_action is not None:
             first_action = first_action.replace('\'', '')
         if second_action is not None:
             second_action = second_action.replace('\'', '')
+        # Check if action names exist in the problem
         for action in self.ground_problem.actions:
             if action.name == first_action:
                 self.first_action = action.name
             if action.name == second_action:
                 self.second_action = action.name
+                
+        # Get step number from the user
         self.step = step
+        
+        # Final general assertions 
         assert self.first_action is not None, "In order to use the contrastive version of OMTPlan you need at least one valid action for the domain used."
         if self.axiom_num == 3 or self.axiom_num == 4:
             assert self.second_action is not None, "In order to encode axioms 3 and 4 in the contrastive version of OMTPlan you need also a second valid action for the domain used."
             assert self.step is not None, "Axioms 3 and 4 also need the step number at which the first action takes place"
                 
     def encode_first_axiom(self):
+        '''
+        Encode first contrastive axiom. "Why is action a (self.first_action) not used in the plan, rather than being used?"
+        
+        @return fact_enc: encoding for fact support of axiom 1. Encoding where self.first_action is never used in any point of the plan
+        @return foil_enc: encoding for foil support of axiom 1. Encoding where self.first_action is used in any point of the plan
+        '''
         fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
         for step in range(self.horizon):
             fact_actions.append(z3.Not(self.action_variables[step][self.first_action]))
@@ -747,6 +763,12 @@ class EncoderSMTContrastive(EncoderSMT):
         return fact_enc, foil_enc
     
     def encode_second_axiom(self):
+        '''
+        Encode second contrastive axiom. "Why is action a (self.first_action) used in the plan, rather than not being used?"
+        
+        @return fact_enc: encoding for fact support of axiom 2. Encoding where self.first_action is used in any point of the plan
+        @return foil_enc: encoding for foil support of axiom 2. Encoding where self.first_action is never used in any point of the plan
+        '''
         fact_actions, fact_enc, foil_actions, foil_enc = [],[],[],[]
         for step in range(self.horizon):
             fact_actions.append(self.action_variables[step][self.first_action])
@@ -756,6 +778,12 @@ class EncoderSMTContrastive(EncoderSMT):
         return fact_enc, foil_enc
     
     def encode_third_axiom(self):
+        '''
+        Encode third contrastive axiom. "Why is action a (self.first_action) used in state s (self.step), rather than action b (self.second_action)?"
+        
+        @return fact_enc: encoding for fact support of axiom 3. Encoding where self.first_action is used at self.step
+        @return foil_enc: encoding for foil support of axiom 3. Encoding where self.second_action is used at self.step
+        '''
         assert self.step <= self.horizon and self.step >= 0, "The step number for axiom 3 has to be between 0 and horizon"
         fact_enc, foil_enc = [],[]
         fact_enc.append(self.action_variables[self.step][self.first_action])
@@ -763,6 +791,13 @@ class EncoderSMTContrastive(EncoderSMT):
         return fact_enc, foil_enc
     
     def encode_fourth_axiom(self):
+        '''
+        Encode third contrastive axiom. "Why is action a (self.first_action) not performed before (after) action b (self.second_action),
+        rather than a (self.first_action) being performed after (before) action b (self.second_action)?"
+        
+        @return fact_enc: encoding for fact support of axiom 4. Encoding where self.first_action is used at self.step and self.second_action is used at self.step+1
+        @return foil_enc: encoding for foil support of axiom 4. Encoding where self.second_action is used at self.step and self.first_action is used at self.step
+        '''
         assert self.step < self.horizon and self.step >= 0, "The step number for axiom 4 has to be between 0 and the horizon, last one excluded."
         if self.step == self.horizon: return [],[]
         fact_enc, foil_enc = [],[]

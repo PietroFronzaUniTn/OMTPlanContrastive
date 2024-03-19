@@ -556,6 +556,13 @@ def get_planning_problems(BASE_DIR):
     return planning_problems
 
 def model_counting(formula, contrastive_type="fact"):
+    """!
+    Count solutions for formula encoded in input.
+
+    @param formula
+    @param contrastive_type
+    @return int: length of satisfiable solutions found by the solver
+    """ 
     def all_smt(s, initial_terms):
         def block_term(s, m, t):
             s.add(t != m.eval(t, model_completion=True))
