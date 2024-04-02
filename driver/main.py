@@ -142,8 +142,9 @@ def main(BASE_DIR):
             if args.contrastive:
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "fact")
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "foil")
-                fact_support = utils.model_counting(formula, "fact")
-                foil_support = utils.model_counting(formula, "foil")
+                action_variable_list = utils.encoder_action_list(e, args.translate)
+                fact_support = utils.model_counting(formula, action_variable_list, "fact")
+                foil_support = utils.model_counting(formula, action_variable_list, "foil")
                 if(fact_support!=0):
                     robustness = foil_support/fact_support
                     print("Robustness measure: ", robustness)

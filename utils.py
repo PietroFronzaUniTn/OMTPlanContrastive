@@ -26,6 +26,8 @@ from unified_planning.shortcuts import *
 
 import unified_planning
 
+import itertools
+
 def getValFromModel(assignment):
     """!
         Extracts values from Z3 model
@@ -555,11 +557,12 @@ def get_planning_problems(BASE_DIR):
 
     return planning_problems
 
-def model_counting(formula, contrastive_type="fact"):
+def model_counting(formula, initial_variables, contrastive_type="fact"):
     """!
     Count solutions for formula encoded in input.
 
     @param formula
+    @param initial_variables
     @param contrastive_type
     @return int: length of satisfiable solutions found by the solver
     """ 
@@ -572,6 +575,7 @@ def model_counting(formula, contrastive_type="fact"):
             if sat == s.check():
                 m = s.model()
                 yield m
+                #print(m)
                 for i in range(len(terms)):
                     s.push()
                     block_term(s, m, terms[i])
@@ -593,6 +597,14 @@ def model_counting(formula, contrastive_type="fact"):
         else:
             solver.add(sub_formula)
     
-    support = list(all_smt(solver, formula['initial']))
+    support = list(all_smt(solver, initial_variables))
+    #print(support)
     print("Size of {} support: ".format(contrastive_type), len(support))
     return len(support)
+
+def encoder_action_list(encoder, horizon):
+    action_list=[]
+    for step in range(horizon):
+        for _, action in encoder.action_variables[step].items():
+            action_list.append(action)
+    return action_list
