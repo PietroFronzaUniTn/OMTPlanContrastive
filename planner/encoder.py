@@ -784,7 +784,7 @@ class EncoderSMTContrastive(EncoderSMT):
         @return fact_enc: encoding for fact support of axiom 3. Encoding where self.first_action is used at self.step
         @return foil_enc: encoding for foil support of axiom 3. Encoding where self.second_action is used at self.step
         '''
-        assert self.step <= self.horizon and self.step >= 0, "The step number for axiom 3 has to be between 0 and horizon"
+        assert self.step < self.horizon and self.step >= 0, "The step number for axiom 3 has to be between 0 and horizon"
         fact_enc, foil_enc = [],[]
         fact_enc.append(self.action_variables[self.step][self.first_action])
         foil_enc.append(self.action_variables[self.step][self.second_action])
@@ -798,7 +798,7 @@ class EncoderSMTContrastive(EncoderSMT):
         @return fact_enc: encoding for fact support of axiom 4. Encoding where self.first_action is used at self.step and self.second_action is used at self.step+1
         @return foil_enc: encoding for foil support of axiom 4. Encoding where self.second_action is used at self.step and self.first_action is used at self.step
         '''
-        assert self.step < self.horizon and self.step >= 0, "The step number for axiom 4 has to be between 0 and the horizon, last one excluded."
+        assert self.step < self.horizon-1 and self.step >= 0, "The step number for axiom 4 has to be between 0 and the horizon, last one excluded."
         if self.step == self.horizon: return [],[]
         fact_enc, foil_enc = [],[]
         fact_enc.append(z3.And(self.action_variables[self.step][self.first_action],self.action_variables[self.step+1][self.second_action]))
