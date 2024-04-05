@@ -39,12 +39,11 @@ def parse_args():
 
 def get_set_action_variables(encoder):
     action_set= set()
-    #print(encoder.action_variables)
+
     for _, action in encoder.action_variables.items():
         action_set.update(list(action.keys()))
     return list(action_set)
 
-# TODO: create function to extract plan actions. If args.plan is not set use the solver (pass encoder, solve and validate). If args.plan is set extract list of actions    
 def get_plan_action(plan, encoder):
     if not plan:
         s = search.SearchSMT(encoder, 100)
@@ -54,12 +53,22 @@ def get_plan_action(plan, encoder):
         else:
             return []
     else:
+        plan_actions = []
         # Open file
-        # Get list of actions
-        # For all action in plan
-            # name of action + list of parameters in parenthesis with _ between object
-        # return list
-        return []
+        with open(os.path.join(BASE_DIR,plan),'r') as fo:
+            for line in fo:
+                line = line.replace("(", " ")
+                line = line.replace(")", "")
+                line = line.strip()
+                action_line = line.split(" ")
+                action = ""
+                for i in range(len(action_line)):
+                    if i==0:
+                       action += action_line[i]
+                    else:
+                        action += "_"+action_line[i] 
+                plan_actions.append(action)
+        return plan_actions
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -78,6 +87,8 @@ if len(plan_actions) == 0:
     raise Exception("Plan is not valid")
 
 plan_actions = [str(item) for item in plan_actions]
+
+e.encode(len(plan_actions))
 
 # Get list of action variables
 action_variables = get_set_action_variables(e)
