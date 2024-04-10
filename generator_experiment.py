@@ -1,10 +1,7 @@
-import sys
 import os
+import random
 from driver import arguments
 
-import subprocess
-import utils
-from copy import deepcopy
 from planner import encoder
 from planner import modifier
 from planner import search
@@ -70,7 +67,16 @@ def get_plan_action(plan, encoder):
                 plan_actions.append(action)
         return plan_actions
 
+def get_random_commands(command_list):
+    commands = []
+    for i in range(NUM_EXPERIMENTS):
+        rand_index = random.randint(0, len(command_list)-1)
+        print(rand_index)
+        commands.append(command_list[rand_index])
+    return commands
+
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+NUM_EXPERIMENTS = 3
 
 args = parse_args()
 
@@ -92,29 +98,30 @@ e.encode(len(plan_actions))
 
 # Get list of action variables
 action_variables = get_set_action_variables(e)
-#print(plan_actions)
-#print(action_variables)
 
 base_command = "time python omtplan.py -smt -linear -translate {} -pprint -domain {} {}".format(len(plan_actions), args.domain, args.problem)
-commands = []
-
 base_axiom_args = " -contrastive -axiom {} -first_action {}"
 optional_axiom_args = " -second_action {} -step {}"
 
-#for action in plan_actions:
-    #print(action)
+commands = []
+axiom_commands = []
 
 # Save commands for axiom 1
 # Only actions not present in the plan
 for action in action_variables:
     if action not in plan_actions:
-        commands.append(base_command + base_axiom_args.format(1, action))
+        axiom_commands.append(base_command + base_axiom_args.format(1, action))
 
+commands.extend(get_random_commands(axiom_commands))
+axiom_commands.clear()
 
 # Save commands for axiom 2
 for action in action_variables:
     if action in plan_actions:
-        commands.append(base_command + base_axiom_args.format(2, action))
+        axiom_commands.append(base_command + base_axiom_args.format(2, action))
+        
+commands.extend(get_random_commands(axiom_commands))
+axiom_commands.clear()
 
 # Save commands for axiom 3
 for action1 in action_variables:
@@ -122,7 +129,10 @@ for action1 in action_variables:
         for action2 in action_variables: 
             if action1!=action2:
                 for step in range(len(plan_actions)):
-                    commands.append(base_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+                    axiom_commands.append(base_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+
+commands.extend(get_random_commands(axiom_commands))
+axiom_commands.clear()
 
 # Save commands for axiom 4
 for action1 in action_variables:
@@ -131,8 +141,13 @@ for action1 in action_variables:
             if action2 in plan_actions:
                 if action1!=action2:
                     for step in range(len(plan_actions)-1):
-                        commands.append(base_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))
+                        axiom_commands.append(base_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))
+                        
+commands.extend(get_random_commands(axiom_commands))
+axiom_commands.clear()
                         
 with open(os.path.join(BASE_DIR,'{}_contrastive_commands.txt').format(problem_name),'w') as fo:
     for command in commands:
+        fo.write("------------------------\n")
+        fo.write("echo \"%s\"\n" % command)
         fo.write("%s\n" % command)
