@@ -71,7 +71,6 @@ def get_random_commands(command_list):
     commands = []
     for i in range(NUM_EXPERIMENTS):
         rand_index = random.randint(0, len(command_list)-1)
-        print(rand_index)
         commands.append(command_list[rand_index])
     return commands
 
