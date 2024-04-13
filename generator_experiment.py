@@ -111,16 +111,18 @@ for action in action_variables:
     if action not in plan_actions:
         axiom_commands.append(base_command + base_axiom_args.format(1, action))
 
-commands.extend(get_random_commands(axiom_commands))
-axiom_commands.clear()
+if len(axiom_commands) > 0:
+    commands.extend(get_random_commands(axiom_commands))
+    axiom_commands.clear()
 
 # Save commands for axiom 2
 for action in action_variables:
     if action in plan_actions:
         axiom_commands.append(base_command + base_axiom_args.format(2, action))
         
-commands.extend(get_random_commands(axiom_commands))
-axiom_commands.clear()
+if len(axiom_commands) > 0:
+    commands.extend(get_random_commands(axiom_commands))
+    axiom_commands.clear()
 
 # Save commands for axiom 3
 for action1 in action_variables:
@@ -130,8 +132,9 @@ for action1 in action_variables:
                 for step in range(len(plan_actions)):
                     axiom_commands.append(base_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
-commands.extend(get_random_commands(axiom_commands))
-axiom_commands.clear()
+if len(axiom_commands) > 0:
+    commands.extend(get_random_commands(axiom_commands))
+    axiom_commands.clear()
 
 # Save commands for axiom 4
 for action1 in action_variables:
@@ -142,8 +145,9 @@ for action1 in action_variables:
                     for step in range(len(plan_actions)-1):
                         axiom_commands.append(base_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))
                         
-commands.extend(get_random_commands(axiom_commands))
-axiom_commands.clear()
+if len(axiom_commands) > 0:
+    commands.extend(get_random_commands(axiom_commands))
+    axiom_commands.clear()
                         
 with open(os.path.join(BASE_DIR,'{}_contrastive_commands.txt').format(problem_name),'w') as fo:
     for command in commands:
