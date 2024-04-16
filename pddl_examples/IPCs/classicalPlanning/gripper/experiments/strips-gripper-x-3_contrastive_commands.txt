@@ -1,0 +1,36 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 1 -first_action drop_ball1_rooma_right"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 1 -first_action drop_ball1_rooma_right
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 1 -first_action pick_ball6_roomb_right"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 1 -first_action pick_ball6_roomb_right
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 1 -first_action pick_ball6_roomb_left"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 1 -first_action pick_ball6_roomb_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 2 -first_action pick_ball2_rooma_left"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 2 -first_action pick_ball2_rooma_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 2 -first_action pick_ball4_rooma_left"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 2 -first_action pick_ball4_rooma_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 2 -first_action drop_ball7_roomb_left"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 2 -first_action drop_ball7_roomb_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 3 -first_action pick_ball4_rooma_left -second_action pick_ball1_roomb_right -step 0"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 3 -first_action pick_ball4_rooma_left -second_action pick_ball1_roomb_right -step 0
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 3 -first_action drop_ball5_roomb_right -second_action drop_ball1_rooma_left -step 3"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 3 -first_action drop_ball5_roomb_right -second_action drop_ball1_rooma_left -step 3
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 3 -first_action move_rooma_roomb -second_action drop_ball7_roomb_right -step 3"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 3 -first_action move_rooma_roomb -second_action drop_ball7_roomb_right -step 3
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 4 -first_action move_roomb_rooma -second_action drop_ball5_roomb_right -step 28"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 4 -first_action move_roomb_rooma -second_action drop_ball5_roomb_right -step 28
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 4 -first_action drop_ball8_roomb_right -second_action pick_ball3_rooma_left -step 25"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 4 -first_action drop_ball8_roomb_right -second_action pick_ball3_rooma_left -step 25
+------------------------
+echo "time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 4 -first_action drop_ball8_roomb_right -second_action pick_ball1_rooma_left -step 4"
+time python omtplan.py -smt -linear -translate 31 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/gripper/domain.pddl ./pddl_examples/IPCs/classicalPlanning/gripper/instances/prob03.pddl -contrastive -axiom 4 -first_action drop_ball8_roomb_right -second_action pick_ball1_rooma_left -step 4

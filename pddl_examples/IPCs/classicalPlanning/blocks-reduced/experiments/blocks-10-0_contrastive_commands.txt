@@ -1,0 +1,36 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 1 -first_action unstack_a_f"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 1 -first_action unstack_a_f
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 1 -first_action stack_e_g"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 1 -first_action stack_e_g
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 1 -first_action unstack_i_a"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 1 -first_action unstack_i_a
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 2 -first_action put-down_a"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 2 -first_action put-down_a
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 2 -first_action pick-up_g"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 2 -first_action pick-up_g
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 2 -first_action put-down_b"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 2 -first_action put-down_b
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 3 -first_action unstack_e_j -second_action stack_g_e -step 36"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 3 -first_action unstack_e_j -second_action stack_g_e -step 36
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 3 -first_action pick-up_e -second_action unstack_j_a -step 37"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 3 -first_action pick-up_e -second_action unstack_j_a -step 37
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 3 -first_action unstack_c_d -second_action stack_j_g -step 5"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 3 -first_action unstack_c_d -second_action stack_j_g -step 5
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 4 -first_action unstack_h_a -second_action put-down_j -step 22"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 4 -first_action unstack_h_a -second_action put-down_j -step 22
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 4 -first_action stack_f_j -second_action unstack_j_b -step 37"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 4 -first_action stack_f_j -second_action unstack_j_b -step 37
+------------------------
+echo "time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 4 -first_action stack_d_c -second_action unstack_d_c -step 27"
+time python omtplan.py -smt -linear -translate 44 -pprint -domain ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/domain.pddl ./pddl_examples/IPCs/classicalPlanning/blocks-reduced/instances/probBLOCKS-10-0.pddl -contrastive -axiom 4 -first_action stack_d_c -second_action unstack_d_c -step 27

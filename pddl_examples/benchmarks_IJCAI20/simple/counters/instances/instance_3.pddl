@@ -1,5 +1,5 @@
 ;; Enrico Scala (enricos83@gmail.com) and Miquel Ramirez (miquel.ramirez@gmail.com)
-(define (problem instance_4)
+(define (problem instance_3)
   (:domain fn-counters)
   (:objects
     c0 c1 c2  - counter
