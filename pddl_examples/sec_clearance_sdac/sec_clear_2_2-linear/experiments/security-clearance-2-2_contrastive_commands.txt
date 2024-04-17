@@ -1,0 +1,36 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 1 -first_action authorize_d1_l1"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 1 -first_action authorize_d1_l1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 1 -first_action authorize_d2_l1"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 1 -first_action authorize_d2_l1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 1 -first_action authorize_d2_l1"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 1 -first_action authorize_d2_l1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 2 -first_action authorize_all_d1"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 2 -first_action authorize_all_d1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 2 -first_action increase_priority_d2"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 2 -first_action increase_priority_d2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 2 -first_action increase_priority_d2"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 2 -first_action increase_priority_d2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 3 -first_action authorize_all_d2 -second_action authorize_d2_l1 -step 3"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 3 -first_action authorize_all_d2 -second_action authorize_d2_l1 -step 3
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 3 -first_action increase_priority_d2 -second_action increase_priority_d1 -step 2"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 3 -first_action increase_priority_d2 -second_action increase_priority_d1 -step 2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 3 -first_action increase_priority_d1 -second_action authorize_d2_l1 -step 0"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 3 -first_action increase_priority_d1 -second_action authorize_d2_l1 -step 0
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 4 -first_action increase_priority_d2 -second_action authorize_all_d2 -step 2"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 4 -first_action increase_priority_d2 -second_action authorize_all_d2 -step 2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 4 -first_action increase_priority_d1 -second_action authorize_all_d1 -step 0"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 4 -first_action increase_priority_d1 -second_action authorize_all_d1 -step 0
+------------------------
+echo "time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 4 -first_action increase_priority_d1 -second_action authorize_all_d1 -step 0"
+time python omtplan.py -smt -linear -translate 4 -pprint -domain ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/domain.pddl ./pddl_examples/sec_clearance_sdac/sec_clear_2_2-linear/instances/prob_2_2.pddl -contrastive -axiom 4 -first_action increase_priority_d1 -second_action authorize_all_d1 -step 0

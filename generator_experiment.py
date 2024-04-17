@@ -125,29 +125,29 @@ if len(axiom_commands) > 0:
     axiom_commands.clear()
 
 # Save commands for axiom 3
-for action1 in action_variables:
-    if action1 in plan_actions:
-        for action2 in action_variables: 
-            if action1!=action2:
-                for step in range(len(plan_actions)):
-                    axiom_commands.append(base_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+for step in range(len(plan_actions)):
+    action1 = plan_actions[step]
+    for action2 in action_variables: 
+        if action1!=action2:
+            axiom_commands.append(base_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
 if len(axiom_commands) > 0:
     commands.extend(get_random_commands(axiom_commands))
     axiom_commands.clear()
 
 # Save commands for axiom 4
-for action1 in action_variables:
-    if action1 in plan_actions:
-        for action2 in action_variables: 
-            if action2 in plan_actions:
-                if action1!=action2:
-                    for step in range(len(plan_actions)-1):
-                        axiom_commands.append(base_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))
+for step in range(len(plan_actions)-1):
+    action1 = plan_actions[step]
+    action2 = plan_actions[step+1]
+    if action1 != action2:
+        axiom_commands.append(base_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
                         
 if len(axiom_commands) > 0:
     commands.extend(get_random_commands(axiom_commands))
     axiom_commands.clear()
+else:
+    commands.append("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
+    print("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
                         
 with open(os.path.join(BASE_DIR,'{}_contrastive_commands.txt').format(problem_name),'w') as fo:
     for command in commands:

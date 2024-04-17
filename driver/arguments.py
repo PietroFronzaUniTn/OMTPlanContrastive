@@ -81,6 +81,8 @@ def parse_args():
     parser.add_argument('-second_action', help='Second action to consider in contrastive axiom encoding', type=ascii)
     
     parser.add_argument('-step', type=int, default=0, help='Step of encoded action for axioms 3 and 4')
+    
+    parser.add_argument('-foil', action='store_true', help='Starts only foil model counting')
 
     args = parser.parse_args()
 

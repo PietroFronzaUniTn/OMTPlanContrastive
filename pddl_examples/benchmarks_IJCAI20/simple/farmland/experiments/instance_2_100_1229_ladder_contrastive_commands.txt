@@ -1,0 +1,30 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 1 -first_action move-fast_farm1_farm0"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 1 -first_action move-fast_farm1_farm0
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 1 -first_action move-slow_farm0_farm1"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 1 -first_action move-slow_farm0_farm1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 1 -first_action move-fast_farm1_farm0"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 1 -first_action move-fast_farm1_farm0
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 2 -first_action move-fast_farm0_farm1"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 2 -first_action move-fast_farm0_farm1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 2 -first_action move-fast_farm0_farm1"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 2 -first_action move-fast_farm0_farm1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 2 -first_action move-fast_farm0_farm1"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 2 -first_action move-fast_farm0_farm1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 3 -first_action move-fast_farm0_farm1 -second_action move-slow_farm0_farm1 -step 12"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 3 -first_action move-fast_farm0_farm1 -second_action move-slow_farm0_farm1 -step 12
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 3 -first_action move-fast_farm0_farm1 -second_action move-slow_farm1_farm0 -step 2"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 3 -first_action move-fast_farm0_farm1 -second_action move-slow_farm1_farm0 -step 2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 3 -first_action move-fast_farm0_farm1 -second_action move-fast_farm1_farm0 -step 9"
+time python omtplan.py -smt -linear -translate 14 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/farmland/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/farmland/instances/instance_1.pddl -contrastive -axiom 3 -first_action move-fast_farm0_farm1 -second_action move-fast_farm1_farm0 -step 9
+------------------------
+echo "Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps"
+Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps

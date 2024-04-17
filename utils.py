@@ -28,6 +28,8 @@ import unified_planning
 
 import itertools
 
+number_solution = 0
+
 def getValFromModel(assignment):
     """!
         Extracts values from Z3 model
@@ -572,7 +574,10 @@ def model_counting(formula, initial_variables, contrastive_type="fact"):
         def fix_term(s, m, t):
             s.add(t == m.eval(t, model_completion=True))
         def all_smt_rec(terms):
+            global number_solution
             if sat == s.check():
+                number_solution = number_solution +1
+                #print(number_solution)
                 m = s.model()
                 yield m
                 #print(m)
@@ -585,6 +590,8 @@ def model_counting(formula, initial_variables, contrastive_type="fact"):
                     s.pop()   
         yield from all_smt_rec(list(initial_terms))
     
+    global number_solution
+    number_solution = 0
     solver = Solver()
 
     # Assert subformulas in solver
