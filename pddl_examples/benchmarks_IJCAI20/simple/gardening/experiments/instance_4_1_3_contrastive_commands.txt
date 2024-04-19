@@ -1,0 +1,36 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 1 -first_action move_left_agent1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 1 -first_action move_left_agent1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 1 -first_action move_left_agent1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 1 -first_action move_left_agent1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 1 -first_action move_up_left_agent1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 1 -first_action move_up_left_agent1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 2 -first_action move_up_right_agent1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 2 -first_action move_up_right_agent1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 2 -first_action move_up_right_agent1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 2 -first_action move_up_right_agent1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 2 -first_action pour_agent1_plant1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 2 -first_action pour_agent1_plant1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 3 -first_action load_agent1_tap1 -second_action move_right_agent1 -step 4"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 3 -first_action load_agent1_tap1 -second_action move_right_agent1 -step 4
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 3 -first_action move_up_agent1 -second_action move_down_left_agent1 -step 1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 3 -first_action move_up_agent1 -second_action move_down_left_agent1 -step 1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 3 -first_action move_down_left_agent1 -second_action move_up_left_agent1 -step 8"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 3 -first_action move_down_left_agent1 -second_action move_up_left_agent1 -step 8
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 4 -first_action load_agent1_tap1 -second_action move_down_left_agent1 -step 7"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 4 -first_action load_agent1_tap1 -second_action move_down_left_agent1 -step 7
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 4 -first_action load_agent1_tap1 -second_action move_down_left_agent1 -step 7"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 4 -first_action load_agent1_tap1 -second_action move_down_left_agent1 -step 7
+------------------------
+echo "time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 4 -first_action move_up_agent1 -second_action load_agent1_tap1 -step 1"
+time python omtplan.py -smt -linear -translate 15 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/gardening/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/gardening/instances/instance_3.pddl -contrastive -axiom 4 -first_action move_up_agent1 -second_action load_agent1_tap1 -step 1
