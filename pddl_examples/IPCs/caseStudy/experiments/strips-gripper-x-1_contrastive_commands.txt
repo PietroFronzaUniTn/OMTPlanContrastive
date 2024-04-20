@@ -1,0 +1,36 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 1 -first_action drop-both_ball1_ball2_roomb_right_right"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 1 -first_action drop-both_ball1_ball2_roomb_right_right
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 1 -first_action pick_ball1_roomb_right"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 1 -first_action pick_ball1_roomb_right
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 1 -first_action pick_ball1_rooma_left"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 1 -first_action pick_ball1_rooma_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 2 -first_action pick_ball2_rooma_left"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 2 -first_action pick_ball2_rooma_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 2 -first_action drop_ball2_roomb_left"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 2 -first_action drop_ball2_roomb_left
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 2 -first_action move_roomb_rooma"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 2 -first_action move_roomb_rooma
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 3 -first_action pick_ball1_rooma_right -second_action drop-both_ball2_ball2_rooma_left_right -step 4"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 3 -first_action pick_ball1_rooma_right -second_action drop-both_ball2_ball2_rooma_left_right -step 4
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 3 -first_action move_rooma_roomb -second_action pick_ball1_rooma_right -step 1"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 3 -first_action move_rooma_roomb -second_action pick_ball1_rooma_right -step 1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 3 -first_action drop_ball1_roomb_right -second_action drop-both_ball1_ball2_rooma_right_right -step 6"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 3 -first_action drop_ball1_roomb_right -second_action drop-both_ball1_ball2_rooma_right_right -step 6
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 4 -first_action drop_ball2_roomb_left -second_action move_roomb_rooma -step 2"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 4 -first_action drop_ball2_roomb_left -second_action move_roomb_rooma -step 2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 4 -first_action move_roomb_rooma -second_action drop_ball2_roomb_left -step 3"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 4 -first_action move_roomb_rooma -second_action drop_ball2_roomb_left -step 3
+------------------------
+echo "time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 4 -first_action move_rooma_roomb -second_action drop_ball1_roomb_right -step 5"
+time python omtplan.py -smt -linear -translate 7 -pprint -domain ./pddl_examples/IPCs/caseStudy/domain.pddl ./pddl_examples/IPCs/caseStudy/instances/prob01.pddl -contrastive -axiom 4 -first_action move_rooma_roomb -second_action drop_ball1_roomb_right -step 5
