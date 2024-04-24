@@ -94,7 +94,6 @@ if len(plan_actions) == 0:
 plan_actions = [str(item) for item in plan_actions]
 
 e.encode(len(plan_actions))
-print("encoding complete")
 
 # Get list of action variables
 action_variables = get_set_action_variables(e)
