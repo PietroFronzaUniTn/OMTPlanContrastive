@@ -1,0 +1,36 @@
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 1 -first_action decrement_c0"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 1 -first_action decrement_c0
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 1 -first_action decrement_c2"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 1 -first_action decrement_c2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 1 -first_action decrement_c1"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 1 -first_action decrement_c1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 2 -first_action increment_c3"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 2 -first_action increment_c3
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 2 -first_action increment_c1"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 2 -first_action increment_c1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 2 -first_action increment_c2"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 2 -first_action increment_c2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 3 -first_action increment_c3 -second_action decrement_c2 -step 1"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 3 -first_action increment_c3 -second_action decrement_c2 -step 1
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 3 -first_action increment_c3 -second_action decrement_c3 -step 5"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 3 -first_action increment_c3 -second_action decrement_c3 -step 5
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 3 -first_action increment_c3 -second_action decrement_c1 -step 2"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 3 -first_action increment_c3 -second_action decrement_c1 -step 2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 4 -first_action increment_c3 -second_action increment_c2 -step 2"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 4 -first_action increment_c3 -second_action increment_c2 -step 2
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 4 -first_action increment_c2 -second_action increment_c1 -step 3"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 4 -first_action increment_c2 -second_action increment_c1 -step 3
+------------------------
+echo "time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 4 -first_action increment_c1 -second_action increment_c3 -step 4"
+time python omtplan.py -smt -linear -translate 6 -pprint -domain ./pddl_examples/benchmarks_IJCAI20/simple/counters/domain.pddl ./pddl_examples/benchmarks_IJCAI20/simple/counters/instances/instance_4.pddl -contrastive -axiom 4 -first_action increment_c1 -second_action increment_c3 -step 4

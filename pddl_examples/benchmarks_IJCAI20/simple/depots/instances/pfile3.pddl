@@ -43,7 +43,7 @@
 	(located crate5 distributor1)
 	(on crate5 crate2)
 	(= (weight crate5) 50)
-	;(= (fuel-cost) 0)
+	(= (fuel-cost) 0)
 )
 
 (:goal (and

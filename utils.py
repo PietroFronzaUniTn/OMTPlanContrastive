@@ -577,7 +577,7 @@ def model_counting(formula, initial_variables, contrastive_type="fact"):
             global number_solution
             if sat == s.check():
                 number_solution = number_solution +1
-                #print(number_solution)
+                #print(contrastive_type, number_solution)
                 m = s.model()
                 yield m
                 #print(m)
