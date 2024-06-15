@@ -10,6 +10,11 @@ import argparse
 from unified_planning.io import PDDLReader
 from unified_planning.shortcuts import *
 
+from unified_planning.plans import SequentialPlan
+from unified_planning.plans import PartialOrderPlan
+from graphviz import Source
+from unified_planning.plot import plot_partial_order_plan
+
 def parse_args():
     """
     Specifies valid arguments for OMTPlan
@@ -46,9 +51,9 @@ def get_plan_action(plan, encoder):
         s = search.SearchSMT(encoder, 100)
         plan = s.do_linear_search()
         if plan.validate():
-            return plan.plan.actions
+            return plan.plan.actions, plan.plan
         else:
-            return []
+            return [], None
     else:
         plan_actions = []
         # Open file
@@ -65,7 +70,8 @@ def get_plan_action(plan, encoder):
                     else:
                         action += "_"+action_line[i] 
                 plan_actions.append(action)
-        return plan_actions
+            plan = SequentialPlan(plan_actions, e.ground_problem.environment)
+        return plan_actions, plan
 
 def get_random_commands(command_list):
     commands = []
@@ -87,9 +93,22 @@ problem_name = task.name
 
 e = encoder.EncoderSMT(task, modifier.LinearModifier())
 
-plan_actions = get_plan_action(args.plan, e)
+plan_actions, plan = get_plan_action(args.plan, e)
 if len(plan_actions) == 0:
     raise Exception("Plan is not valid")
+
+if not isinstance(plan, SequentialPlan):
+    plan = SequentialPlan()
+partial_order = plan.convert_to(unified_planning.plans.PlanKind.PARTIAL_ORDER_PLAN, task)
+print(plan_actions)
+print(partial_order)
+
+print(partial_order.get_adjacency_list)
+plot_partial_order_plan(partial_order)
+#graph_encode = partial_order.create_graphviz_output(partial_order.get_adjacency_list)
+#print(graph_encode)
+#graph = Source(graph_encode, f"{problem_name}.dot", format="png")
+#graph.view()
 
 plan_actions = [str(item) for item in plan_actions]
 

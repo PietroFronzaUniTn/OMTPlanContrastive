@@ -137,6 +137,8 @@ def main(BASE_DIR):
 
         # Build SMT-LIB encoding and dump (no solving)
         if args.translate:
+            #print(e._computeSerialMutexes())
+            print(e._computeParallelMutexes())
             formula = e.encode(args.translate)
             # Print SMT planning formula (linear) to file
             if args.contrastive:
@@ -167,6 +169,9 @@ def main(BASE_DIR):
         # Build SMT-LIB encoding and dump (no solving)
         if args.translate:
             formula = e.encode(args.translate)
+            print(e.action_variables)
+            print("transitive closure:", formula['tc'])
+            print("ASAP:",formula['asap'])
             # Print OMT planning formula (linear) to file
             utils.printOMTFormula(formula,task.name, BASE_DIR)            
         else:
