@@ -12,6 +12,7 @@ from unified_planning.shortcuts import *
 
 from unified_planning.plans import SequentialPlan
 from unified_planning.plans import PartialOrderPlan
+from unified_planning.plans import ActionInstance
 from graphviz import Source
 from unified_planning.plot import plot_partial_order_plan
 
@@ -49,13 +50,14 @@ def get_set_action_variables(encoder):
 def get_plan_action(plan, encoder):
     if not plan:
         s = search.SearchSMT(encoder, 100)
-        plan = s.do_linear_search()
-        if plan.validate():
-            return plan.plan.actions, plan.plan
+        r_plan = s.do_linear_search()
+        if r_plan.validate():
+            return r_plan.plan.actions, r_plan.plan
         else:
             return [], None
     else:
         plan_actions = []
+        plan_list = []
         # Open file
         with open(os.path.join(BASE_DIR,plan),'r') as fo:
             for line in fo:
@@ -70,8 +72,13 @@ def get_plan_action(plan, encoder):
                     else:
                         action += "_"+action_line[i] 
                 plan_actions.append(action)
-            plan = SequentialPlan(plan_actions, e.ground_problem.environment)
-        return plan_actions, plan
+            actions = e.getActionsList()
+            for action in plan_actions:
+                for g_a in actions:
+                    if g_a.name == action:
+                        plan_list.append(ActionInstance(g_a))
+            r_plan = SequentialPlan(plan_list, e.ground_problem.environment)
+        return plan_actions, r_plan
 
 def get_random_commands(command_list):
     commands = []
@@ -104,7 +111,7 @@ print(plan_actions)
 print(partial_order)
 
 print(partial_order.get_adjacency_list)
-plot_partial_order_plan(partial_order)
+#plot_partial_order_plan(partial_order)
 #graph_encode = partial_order.create_graphviz_output(partial_order.get_adjacency_list)
 #print(graph_encode)
 #graph = Source(graph_encode, f"{problem_name}.dot", format="png")
@@ -117,7 +124,7 @@ e.encode(len(plan_actions))
 # Get list of action variables
 action_variables = get_set_action_variables(e)
 
-base_command = "time python omtplan.py -smt -linear -translate {} -pprint -domain {} {}".format(len(plan_actions), args.domain, args.problem)
+base_command = "time python3 omtplan.py -smt -linear -translate {} -pprint -domain {} {}".format(len(plan_actions), args.domain, args.problem)
 base_axiom_args = " -contrastive -axiom {} -first_action {}"
 optional_axiom_args = " -second_action {} -step {}"
 

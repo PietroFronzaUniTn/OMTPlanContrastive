@@ -123,11 +123,11 @@ class Encoder:
             add_a1, del_a1 = get_add_del_effects(action_1)
             num_1 = get_numeric_effects(action_1)
             pre_1 = get_preconditions(action_1)
-            print("=========ACTIONv 1 ",action_1,"================")
-            print("Add_effect: ", add_a1)
-            print("Del_effect:",del_a1)
-            print("Numeric_effect: ",num_1)
-            print("Precondition:",pre_1)
+            #print("=========ACTIONv 1 ",action_1,"================")
+            #print("Add_effect: ", add_a1)
+            #print("Del_effect:",del_a1)
+            #print("Numeric_effect: ",num_1)
+            #print("Precondition:",pre_1)
 
             for action_2 in self.ground_problem.actions:
                 if not action_1.name == action_2.name:
@@ -135,45 +135,45 @@ class Encoder:
                     add_a2, del_a2 = get_add_del_effects(action_2)
                     num_2 = get_numeric_effects(action_2)
                     pre_2 = get_preconditions(action_2)
-                    print("=========ACTION 2",action_2,"================")
-                    print("Add_effect: ", add_a2)
-                    print("Del_effect:",del_a2)
-                    print("Numeric_effect: ",num_2)
-                    print("Precondition:",pre_2)
+            #        print("=========ACTION 2",action_2,"================")
+            #        print("Add_effect: ", add_a2)
+             #       print("Del_effect:",del_a2)
+              #      print("Numeric_effect: ",num_2)
+               #     print("Precondition:",pre_2)
 
                     ## Condition 1
                     if len(pre_1.intersection(add_a2)) > 0 or len(pre_1.intersection(del_a2)) > 0:
-                        print("MUTEX Condition1:",pre_1.intersection(add_a2))
-                        print("MUTEX Condition1:",pre_1.intersection(del_a2))
+                #        print("MUTEX Condition1:",pre_1.intersection(add_a2))
+                #        print("MUTEX Condition1:",pre_1.intersection(del_a2))
                         mutexes.add((action_1, action_2))
 
                     if len(pre_2.intersection(add_a1)) > 0 or len(pre_2.intersection(del_a1)) > 0:
-                        print("MUTEX Condition1:",pre_2.intersection(add_a1))
-                        print("MUTEX Condition1:",pre_2.intersection(del_a1))
+                #        print("MUTEX Condition1:",pre_2.intersection(add_a1))
+                #        print("MUTEX Condition1:",pre_2.intersection(del_a1))
                         mutexes.add((action_1, action_2))
 
                     ## Condition 2
                     if len(add_a1.intersection(del_a2)) > 0:
-                        print("MUTEX Condition2: ",add_a1.intersection(del_a2))
+                #        print("MUTEX Condition2: ",add_a1.intersection(del_a2))
                         mutexes.add((action_1, action_2))
                     
                     if len(add_a2.intersection(del_a1)) > 0:
-                        print("MUTEX Condition2:",add_a2.intersection(del_a1))
+                #        print("MUTEX Condition2:",add_a2.intersection(del_a1))
                         mutexes.add((action_1, action_2))
 
                     ## Condition 3
                     if num_1 & num_2:
-                        print("MUTEX Condition 3:", num_1 & num_2)
+                #        print("MUTEX Condition 3:", num_1 & num_2)
                         mutexes.add((action_1, action_2))
 
                     ## Condition 4
                     if num_1 & pre_2:
-                        print("MUTEX condition4:", num_1 & pre_2)
+                #        print("MUTEX condition4:", num_1 & pre_2)
                         mutexes.add((action_1, action_2))
 
                     ## Condition 5
                     if num_2 & pre_1:
-                        print("MUTEX CONDITION 5:",num_2 & pre_1)
+                #        print("MUTEX CONDITION 5:",num_2 & pre_1)
                         mutexes.add((action_1, action_2))
 
                     

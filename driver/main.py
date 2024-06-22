@@ -138,7 +138,7 @@ def main(BASE_DIR):
         # Build SMT-LIB encoding and dump (no solving)
         if args.translate:
             #print(e._computeSerialMutexes())
-            print(e._computeParallelMutexes())
+            #print(e._computeParallelMutexes())
             formula = e.encode(args.translate)
             # Print SMT planning formula (linear) to file
             if args.contrastive:
