@@ -13,7 +13,7 @@ from unified_planning.shortcuts import *
 from unified_planning.plans import SequentialPlan
 from unified_planning.plans import PartialOrderPlan
 from unified_planning.plans import ActionInstance
-from graphviz import Source
+#from graphviz import Source
 from unified_planning.plot import plot_partial_order_plan
 
 def parse_args():
@@ -111,7 +111,7 @@ print(plan_actions)
 print(partial_order)
 
 print(partial_order.get_adjacency_list)
-#plot_partial_order_plan(partial_order)
+plot_partial_order_plan(partial_order)
 #graph_encode = partial_order.create_graphviz_output(partial_order.get_adjacency_list)
 #print(graph_encode)
 #graph = Source(graph_encode, f"{problem_name}.dot", format="png")
