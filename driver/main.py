@@ -142,8 +142,8 @@ def main(BASE_DIR):
             formula = e.encode(args.translate)
             # Print SMT planning formula (linear) to file
             if args.contrastive:
-                utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "fact")
-                utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, "foil")
+                utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, args.pprint, "fact")
+                utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, args.pprint, "foil")
                 action_variable_list = utils.encoder_action_list(e, args.translate)
                 if not args.foil:
                     fact_support = utils.model_counting(formula, action_variable_list, "fact")

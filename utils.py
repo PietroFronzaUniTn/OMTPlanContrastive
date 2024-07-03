@@ -344,7 +344,7 @@ def printSMTFormula(formula,problem_name, dump_to_dir):
         with open(os.path.join(dump_to_dir,'{}.smt2').format(problem_name),'w') as fo:
             fo.write(solver.to_smt2())
             
-def printSMTContrastiveFormula(formula,problem_name, dump_to_dir, contrastive_type = "fact"):
+def printSMTContrastiveFormula(formula, problem_name, dump_to_dir, _print, contrastive_type = "fact"):
         """!
         Prints SMT planning formula in SMT-LIB syntax.
 
@@ -352,8 +352,6 @@ def printSMTContrastiveFormula(formula,problem_name, dump_to_dir, contrastive_ty
         @param problem_name
         @param contrastive_type
         """
-
-        print('Printing SMT formula to {}.smt2'.format(problem_name))
 
         solver = Solver()
 
@@ -367,12 +365,14 @@ def printSMTContrastiveFormula(formula,problem_name, dump_to_dir, contrastive_ty
             else:
                 solver.add(sub_formula)
 
-        if contrastive_type == "fact":
-            with open(os.path.join(dump_to_dir,'{}_fact.smt2').format(problem_name),'w') as fo:
-                fo.write(solver.to_smt2())
-        elif contrastive_type == "foil":
-            with open(os.path.join(dump_to_dir,'{}_foil.smt2').format(problem_name),'w') as fo:
-                fo.write(solver.to_smt2())
+        if _print:
+            print('Printing SMT formula to {}.smt2'.format(problem_name))
+            if contrastive_type == "fact":
+                with open(os.path.join(dump_to_dir,'{}_fact.smt2').format(problem_name),'w') as fo:
+                    fo.write(solver.to_smt2())
+            elif contrastive_type == "foil":
+                with open(os.path.join(dump_to_dir,'{}_foil.smt2').format(problem_name),'w') as fo:
+                    fo.write(solver.to_smt2())
 
 def printOMTFormula(formula,problem_name, dump_to_dir):
         """!
