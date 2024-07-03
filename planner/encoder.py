@@ -805,8 +805,8 @@ class EncoderSMTContrastive(EncoderSMT):
         '''
         assert self.step < self.horizon and self.step >= 0, "The step number for axiom 3 has to be between 0 and horizon"
         fact_enc, foil_enc = [],[]
-        fact_enc.append(self.action_variables[self.step][self.first_action])
-        foil_enc.append(self.action_variables[self.step][self.second_action])
+        fact_enc.append(z3.And(self.action_variables[self.step][self.first_action],z3.Not(self.action_variables[self.step][self.second_action])))
+        foil_enc.append(z3.And(self.action_variables[self.step][self.second_action],z3.Not(self.action_variables[self.step][self.first_action])))
         return fact_enc, foil_enc
     
     def encode_fourth_axiom(self):
