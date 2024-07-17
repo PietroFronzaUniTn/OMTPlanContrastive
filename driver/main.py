@@ -40,6 +40,9 @@ def main(BASE_DIR):
     # Parse planner args
     args = arguments.parse_args()
 
+    if args.profiling:
+        from pyinstrument import Profiler
+
     if args.testencoding or args.testsearch:
         failed_to_encode = []
         solved_problems  = []
@@ -131,7 +134,12 @@ def main(BASE_DIR):
             first_action = args.first_action
             second_action = args.second_action
             step = args.step
-            e = encoder.EncoderSMTContrastive(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier(), first_action, second_action, step, axiom)
+            if args.profiling:
+                with Profiler(interval=0.1) as profiler:
+                    e = encoder.EncoderSMTContrastive(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier(), first_action, second_action, step, axiom)
+                profiler.print()
+            else:
+                e = encoder.EncoderSMTContrastive(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier(), first_action, second_action, step, axiom)
         else:     
             e = encoder.EncoderSMT(task, modifier.LinearModifier() if args.linear else modifier.ParallelModifier())
 
@@ -139,20 +147,39 @@ def main(BASE_DIR):
         if args.translate:
             #print(e._computeSerialMutexes())
             #print(e._computeParallelMutexes())
-            formula = e.encode(args.translate)
+            if args.profiling:
+                with Profiler(interval=0.1) as profiler:
+                    formula = e.encode(args.translate)
+                profiler.print()
+            else:
+                formula = e.encode(args.translate)
             # Print SMT planning formula (linear) to file
             if args.contrastive:
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, args.pprint, "fact")
                 utils.printSMTContrastiveFormula(formula, task.name, BASE_DIR, args.pprint, "foil")
                 action_variable_list = utils.encoder_action_list(e, args.translate)
                 if not args.foil:
-                    fact_support = utils.model_counting(formula, action_variable_list, "fact")
-                    if(fact_support!=0):
-                        foil_support = utils.model_counting(formula, action_variable_list, "foil")
-                        robustness = foil_support/fact_support
-                        print("Robustness measure: ", robustness)
+                    if args.profiling:
+                        with Profiler(interval=0.1) as profiler:
+                            fact_support = utils.model_counting(formula, action_variable_list, "fact")
+                            
+                        profiler.print()
+                        with Profiler(interval=0.1) as profiler:
+                            if(fact_support!=0):
+                                foil_support = utils.model_counting(formula, action_variable_list, "foil")
+                                robustness = foil_support/fact_support
+                                print("Robustness measure: ", robustness)
+                            else:
+                                print("Something went wrong. Fact support is empty.")   
+                        profiler.print()
                     else:
-                        print("Something went wrong. Fact support is empty.")
+                        fact_support = utils.model_counting(formula, action_variable_list, "fact")
+                        if(fact_support!=0):
+                            foil_support = utils.model_counting(formula, action_variable_list, "foil")
+                            robustness = foil_support/fact_support
+                            print("Robustness measure: ", robustness)
+                        else:
+                            print("Something went wrong. Fact support is empty.")
                 else:
                     foil_support = utils.model_counting(formula, action_variable_list, "foil")
             else:               

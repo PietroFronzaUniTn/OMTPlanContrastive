@@ -84,6 +84,8 @@ def parse_args():
     
     parser.add_argument('-foil', action='store_true', help='Starts only foil model counting')
 
+    parser.add_argument('-profiling', action='store_true', help='Enables profiling feature')
+
     args = parser.parse_args()
 
     return args

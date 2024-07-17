@@ -10,6 +10,8 @@ import argparse
 from unified_planning.io import PDDLReader
 from unified_planning.shortcuts import *
 
+import networkx as nx
+
 from unified_planning.plans import SequentialPlan
 from unified_planning.plans import PartialOrderPlan
 from unified_planning.plans import ActionInstance
@@ -29,12 +31,14 @@ def parse_args():
 
     parser.add_argument('-domain', help='Path to PDDL domain file', type=arguments._is_valid_file)
     
-    #parser.add_argument('-linear', action='store_true', help='Builds a sequential encoding.')
+    parser.add_argument('-linear', action='store_true', help='Builds a sequential encoding.')
 
-    #parser.add_argument('-parallel', action='store_true', help='Builds a parallel encoding.')
+    parser.add_argument('-parallel', action='store_true', help='Builds a parallel encoding.')
     #parser.add_argument('-b', type=int, default=100, help='Upper bound for OMTPlan search.')
     
     parser.add_argument('-plan', help='Path to PDDL plan file', type=arguments._is_valid_file)
+
+    parser.add_argument('-partial', action='store_true', help='Show partial order graph')
     
     args = parser.parse_args()
     
@@ -87,6 +91,19 @@ def get_random_commands(command_list):
         commands.append(command_list[rand_index])
     return commands
 
+def retrieve_max_depth(graph):
+    starting_nodes = [n for n, d in graph.in_degree() if d==0]
+    shortest_paths = []
+    for starting_node in starting_nodes:
+        shortest_paths.append(nx.shortest_path_length(partial_order._graph, starting_node))
+
+    max_depth = 0
+    for path in shortest_paths:
+        current_depth = max(path.values())
+        if current_depth > max_depth:
+            max_depth = current_depth
+    return max_depth
+
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 NUM_EXPERIMENTS = 3
 
@@ -104,79 +121,103 @@ plan_actions, plan = get_plan_action(args.plan, e)
 if len(plan_actions) == 0:
     raise Exception("Plan is not valid")
 
+print("Finished search")
+
 if not isinstance(plan, SequentialPlan):
     plan = SequentialPlan()
 partial_order = plan.convert_to(unified_planning.plans.PlanKind.PARTIAL_ORDER_PLAN, task)
-print(plan_actions)
-print(partial_order)
+max_depth = retrieve_max_depth(partial_order._graph)
 
-print(partial_order.get_adjacency_list)
-plot_partial_order_plan(partial_order)
-#graph_encode = partial_order.create_graphviz_output(partial_order.get_adjacency_list)
-#print(graph_encode)
-#graph = Source(graph_encode, f"{problem_name}.dot", format="png")
-#graph.view()
+print("Finished max depth search")
+
+if args.partial:
+    plot_partial_order_plan(partial_order)
 
 plan_actions = [str(item) for item in plan_actions]
 
 e.encode(len(plan_actions))
 
+print("Finished encoding")
+
 # Get list of action variables
 action_variables = get_set_action_variables(e)
 
-base_command = "time python3 omtplan.py -smt -linear -translate {} -pprint -domain {} {}".format(len(plan_actions), args.domain, args.problem)
+base_linear_command = "time python3 omtplan.py -smt {} -translate {} -domain {} {}".format('linear',len(plan_actions), args.domain, args.problem)
+base_parallel_command = "time python3 omtplan.py -smt {} -translate {} -domain {} {}".format('parallel',max_depth, args.domain, args.problem)
 base_axiom_args = " -contrastive -axiom {} -first_action {}"
 optional_axiom_args = " -second_action {} -step {}"
 
-commands = []
-axiom_commands = []
+linear_commands = []
+parallel_commands = []
+axiom_linear_commands = []
+axiom_parallel_commands = []
 
 # Save commands for axiom 1
 # Only actions not present in the plan
 for action in action_variables:
     if action not in plan_actions:
-        axiom_commands.append(base_command + base_axiom_args.format(1, action))
+        axiom_linear_commands.append(base_linear_command + base_axiom_args.format(1, action))
+        axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(1, action))
 
-if len(axiom_commands) > 0:
-    commands.extend(get_random_commands(axiom_commands))
-    axiom_commands.clear()
+if len(axiom_linear_commands) > 0:
+    linear_commands.extend(get_random_commands(axiom_linear_commands))
+    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
+    axiom_linear_commands.clear()
+    axiom_parallel_commands.clear()
 
 # Save commands for axiom 2
 for action in action_variables:
     if action in plan_actions:
-        axiom_commands.append(base_command + base_axiom_args.format(2, action))
+        axiom_linear_commands.append(base_linear_command + base_axiom_args.format(2, action))
+        axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(2, action))
         
-if len(axiom_commands) > 0:
-    commands.extend(get_random_commands(axiom_commands))
-    axiom_commands.clear()
+if len(axiom_linear_commands) > 0:
+    linear_commands.extend(get_random_commands(axiom_linear_commands))
+    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
+    axiom_linear_commands.clear()
+    axiom_parallel_commands.clear()
 
 # Save commands for axiom 3
 for step in range(len(plan_actions)):
     action1 = plan_actions[step]
     for action2 in action_variables: 
         if action1!=action2:
-            axiom_commands.append(base_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+            axiom_linear_commands.append(base_linear_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+            axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
-if len(axiom_commands) > 0:
-    commands.extend(get_random_commands(axiom_commands))
-    axiom_commands.clear()
+if len(axiom_linear_commands) > 0:
+    linear_commands.extend(get_random_commands(axiom_linear_commands))
+    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
+    axiom_linear_commands.clear()
+    axiom_parallel_commands.clear()
 
 # Save commands for axiom 4
 for step in range(len(plan_actions)-1):
     action1 = plan_actions[step]
     action2 = plan_actions[step+1]
     if action1 != action2:
-        axiom_commands.append(base_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
+        axiom_linear_commands.append(base_linear_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
+        axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
                         
-if len(axiom_commands) > 0:
-    commands.extend(get_random_commands(axiom_commands))
-    axiom_commands.clear()
+if len(axiom_linear_commands) > 0:
+    linear_commands.extend(get_random_commands(axiom_linear_commands))
+    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
+    axiom_linear_commands.clear()
+    axiom_parallel_commands.clear()
 else:
-    commands.append("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
+    linear_commands.append("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
+    parallel_commands.append("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
     print("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
                         
 with open(os.path.join(BASE_DIR,'{}_contrastive_commands.txt').format(problem_name),'w') as fo:
-    for command in commands:
+    fo.write("================LINEAR EXPERIMENTS================\n")
+    for command in linear_commands:
+        fo.write("------------------------\n")
+        fo.write("echo \"%s\"\n" % command)
+        fo.write("%s\n" % command)
+    fo.write("------------------------\n")
+    fo.write("================PARALLEL EXPERIMENTS================\n")
+    for command in parallel_commands:
         fo.write("------------------------\n")
         fo.write("echo \"%s\"\n" % command)
         fo.write("%s\n" % command)
