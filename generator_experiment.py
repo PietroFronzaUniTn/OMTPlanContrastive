@@ -141,6 +141,8 @@ for path in shortest_paths:
     for key in path.keys():
         layered_actions[path[key]].append(key.action.name)
 
+print(layered_actions)
+
 e.encode(len(plan_actions))
 
 print("Finished encoding")
@@ -191,9 +193,9 @@ for step in range(len(plan_actions)):
             axiom_linear_commands.append(base_linear_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
 for step in range(len(layered_actions)):
-    for action_1 in layered_actions[step]:
-        for action_2 in action_variables:
-            if action_1!=action_2 and not (action_2 in layered_actions[step]):
+    for action1 in layered_actions[step]:
+        for action2 in action_variables:
+            if action1!=action2 and not (action2 in layered_actions[step]):
                 axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
 if len(axiom_linear_commands) > 0:
@@ -213,14 +215,12 @@ for step in range(len(plan_actions)-1):
     action2 = plan_actions[step+1]
     if action1 != action2:
         axiom_linear_commands.append(base_linear_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step)) 
-        if step < max_depth:
-            axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
 
 for step in range(len(layered_actions)-1):
-    for action_1 in layered_actions[step]:
-        for action_2 in action_variables[step+1]:
-            if action_1!=action_2:
-                axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+    for action1 in layered_actions[step]:
+        for action2 in layered_actions[step+1]:
+            if action1!=action2:
+                axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))
 
 if len(axiom_linear_commands) > 0:
     linear_commands.extend(get_random_commands(axiom_linear_commands))
