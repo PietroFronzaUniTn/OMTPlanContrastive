@@ -102,7 +102,7 @@ def retrieve_max_depth(graph):
         current_depth = max(path.values())
         if current_depth > max_depth:
             max_depth = current_depth
-    return max_depth
+    return max_depth, shortest_paths
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 NUM_EXPERIMENTS = 3
@@ -126,7 +126,7 @@ print("Finished search")
 if not isinstance(plan, SequentialPlan):
     plan = SequentialPlan()
 partial_order = plan.convert_to(unified_planning.plans.PlanKind.PARTIAL_ORDER_PLAN, task)
-max_depth = retrieve_max_depth(partial_order._graph)
+max_depth, shortest_paths = retrieve_max_depth(partial_order._graph)
 
 print("Finished max depth search")
 
@@ -134,6 +134,12 @@ if args.partial:
     plot_partial_order_plan(partial_order)
 
 plan_actions = [str(item) for item in plan_actions]
+
+layered_actions = [list() for _ in range(max_depth+1)]
+
+for path in shortest_paths:
+    for key in path.keys():
+        layered_actions[path[key]].append(key.action.name)
 
 e.encode(len(plan_actions))
 
@@ -183,14 +189,23 @@ for step in range(len(plan_actions)):
     for action2 in action_variables: 
         if action1!=action2:
             axiom_linear_commands.append(base_linear_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
-            if step <= max_depth:
+
+for step in range(len(layered_actions)):
+    for action_1 in layered_actions[step]:
+        for action_2 in action_variables:
+            if action_1!=action_2 and not (action_2 in layered_actions[step]):
                 axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
 if len(axiom_linear_commands) > 0:
     linear_commands.extend(get_random_commands(axiom_linear_commands))
-    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
     axiom_linear_commands.clear()
+
+if len(axiom_parallel_commands) > 0:
+    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
     axiom_parallel_commands.clear()
+else:
+    parallel_commands.append("Axiom 3 encoding not supported since all actions are parallelized and are used in the plan")
+    print("Axiom 3 encoding not supported since all actions are parallelized and are used in the plan")
 
 # Save commands for axiom 4
 for step in range(len(plan_actions)-1):
@@ -200,24 +215,34 @@ for step in range(len(plan_actions)-1):
         axiom_linear_commands.append(base_linear_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step)) 
         if step < max_depth:
             axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
-                        
+
+for step in range(len(layered_actions)-1):
+    for action_1 in layered_actions[step]:
+        for action_2 in action_variables[step+1]:
+            if action_1!=action_2:
+                axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+
 if len(axiom_linear_commands) > 0:
     linear_commands.extend(get_random_commands(axiom_linear_commands))
-    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
     axiom_linear_commands.clear()
-    axiom_parallel_commands.clear()
 else:
     linear_commands.append("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
-    parallel_commands.append("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
     print("Axiom 4 encoding not supported since the plan is made of one action repeated over multiple steps")
-                        
+
+if len(axiom_parallel_commands) > 0:
+    parallel_commands.extend(get_random_commands(axiom_parallel_commands))
+    axiom_parallel_commands.clear()
+else:
+    parallel_commands.append("Axiom 4 encoding not supported since the plan is either made of one action repeated over multiple steps or all the actions in the plan are parallelizable")
+    print("Axiom 4 encoding not supported since the plan is either made of one action repeated over multiple steps or all the actions in the plan are parallelizable")
+
 with open(os.path.join(BASE_DIR,'{}_contrastive_commands.txt').format(problem_name),'w') as fo:
-    fo.write("================LINEAR EXPERIMENTS================\n")
+    '''fo.write("================LINEAR EXPERIMENTS================\n")
     for command in linear_commands:
         fo.write("------------------------\n")
         fo.write("echo \"%s\"\n" % command)
         fo.write("%s\n" % command)
-    fo.write("------------------------\n")
+    fo.write("------------------------\n")'''
     fo.write("================PARALLEL EXPERIMENTS================\n")
     for command in parallel_commands:
         fo.write("------------------------\n")
