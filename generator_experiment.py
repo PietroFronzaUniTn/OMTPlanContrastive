@@ -142,8 +142,8 @@ print("Finished encoding")
 # Get list of action variables
 action_variables = get_set_action_variables(e)
 
-base_linear_command = "time python3 omtplan.py -smt {} -translate {} -domain {} {}".format('linear',len(plan_actions), args.domain, args.problem)
-base_parallel_command = "time python3 omtplan.py -smt {} -translate {} -domain {} {}".format('parallel',max_depth, args.domain, args.problem)
+base_linear_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('linear',len(plan_actions), args.domain, args.problem)
+base_parallel_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('parallel',max_depth, args.domain, args.problem)
 base_axiom_args = " -contrastive -axiom {} -first_action {}"
 optional_axiom_args = " -second_action {} -step {}"
 
