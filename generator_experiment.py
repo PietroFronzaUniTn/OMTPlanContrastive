@@ -143,7 +143,7 @@ print("Finished encoding")
 action_variables = get_set_action_variables(e)
 
 base_linear_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('linear',len(plan_actions), args.domain, args.problem)
-base_parallel_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('parallel',max_depth, args.domain, args.problem)
+base_parallel_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('parallel',max_depth+1, args.domain, args.problem)
 base_axiom_args = " -contrastive -axiom {} -first_action {}"
 optional_axiom_args = " -second_action {} -step {}"
 
@@ -183,7 +183,8 @@ for step in range(len(plan_actions)):
     for action2 in action_variables: 
         if action1!=action2:
             axiom_linear_commands.append(base_linear_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
-            axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
+            if step <= max_depth:
+                axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
 if len(axiom_linear_commands) > 0:
     linear_commands.extend(get_random_commands(axiom_linear_commands))
@@ -196,8 +197,9 @@ for step in range(len(plan_actions)-1):
     action1 = plan_actions[step]
     action2 = plan_actions[step+1]
     if action1 != action2:
-        axiom_linear_commands.append(base_linear_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
-        axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
+        axiom_linear_commands.append(base_linear_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step)) 
+        if step < max_depth:
+            axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))                        
                         
 if len(axiom_linear_commands) > 0:
     linear_commands.extend(get_random_commands(axiom_linear_commands))
