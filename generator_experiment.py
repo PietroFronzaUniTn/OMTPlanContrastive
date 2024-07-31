@@ -141,8 +141,6 @@ for path in shortest_paths:
     for key in path.keys():
         layered_actions[path[key]].append(key.action.name)
 
-print(layered_actions)
-
 e.encode(len(plan_actions))
 
 print("Finished encoding")
