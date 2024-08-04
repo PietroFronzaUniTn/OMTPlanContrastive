@@ -235,12 +235,12 @@ else:
     print("Axiom 4 encoding not supported since the plan is either made of one action repeated over multiple steps or all the actions in the plan are parallelizable")
 
 with open(os.path.join(BASE_DIR,'{}_contrastive_commands.txt').format(problem_name),'w') as fo:
-    '''fo.write("================LINEAR EXPERIMENTS================\n")
+    fo.write("================LINEAR EXPERIMENTS================\n")
     for command in linear_commands:
         fo.write("------------------------\n")
         fo.write("echo \"%s\"\n" % command)
         fo.write("%s\n" % command)
-    fo.write("------------------------\n")'''
+    fo.write("------------------------\n")
     fo.write("================PARALLEL EXPERIMENTS================\n")
     for command in parallel_commands:
         fo.write("------------------------\n")
