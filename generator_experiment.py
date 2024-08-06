@@ -16,6 +16,7 @@ from unified_planning.plans import SequentialPlan
 from unified_planning.plans import PartialOrderPlan
 from unified_planning.plans import ActionInstance
 #from graphviz import Source
+from pprint import pprint
 from unified_planning.plot import plot_partial_order_plan
 
 def parse_args():
@@ -93,16 +94,78 @@ def get_random_commands(command_list):
 
 def retrieve_max_depth(graph):
     starting_nodes = [n for n, d in graph.in_degree() if d==0]
-    shortest_paths = []
-    for starting_node in starting_nodes:
-        shortest_paths.append(nx.shortest_path_length(partial_order._graph, starting_node))
+    leaves = {n for n, d in graph.out_degree() if d == 0}
+    all_paths = []
+    for root in starting_nodes:
+        for leaf in leaves:
+            paths = list(nx.all_simple_paths(graph, root, leaf))
+            if len(paths) == 0 and root == leaf:
+                all_paths.append([root])
+            all_paths.extend(paths)
 
     max_depth = 0
-    for path in shortest_paths:
-        current_depth = max(path.values())
-        if current_depth > max_depth:
-            max_depth = current_depth
-    return max_depth, shortest_paths
+    for path in all_paths:
+        if len(path)>max_depth:
+            max_depth = len(path)
+    return max_depth, all_paths
+
+    # in generazione path per i comandi, gli starting node non serve cercarli negli altri paths, perché non possono essere parte di un altro path in quanto non hanno archi in ingresso
+
+def paths_to_str(paths):
+    all_paths = []
+    for pt in paths:
+        path = []
+        for a in pt:
+            path.append(a.action.name)
+        all_paths.append(path)
+    return all_paths
+
+def fix_paths_length(paths, max_depth):
+    new_paths = []
+    for path in paths:
+        if len(path) < max_depth and len(path)!=1:
+            new_path = [None for _ in range(max_depth)]
+            curr_ind = 0
+            already_moved = False
+            jump = False
+            for action in path:
+                index = -1
+                for pt in paths:
+                    if len(pt) < max_depth:
+                        # search only in paths that is long originally max length
+                        continue
+                    try:
+                        index = pt.index(action)
+                        # if index found break the cycle
+                        break
+                    except ValueError:
+                        continue
+                if index == -1:
+                    # if index not found, use the index of the original path
+                    index = path.index(action)
+                if curr_ind<index:
+                    # The index found is greater than the current index
+                    if(not already_moved):
+                        # If we do not have moved already an action, we adjust the path to all actions closer together
+                        new_path[index] = action
+                        for i in range(curr_ind):
+                            new_path[index-1-i] = new_path[curr_ind-1-i]
+                            new_path[curr_ind-1-i] = None
+                        curr_ind = index
+                        already_moved = True
+                    else:
+                        jump = True
+                else:
+                    # If the current index is greater than the index of the action or is equal, simply put the action in the current index place
+                    new_path[curr_ind] = action
+                curr_ind = curr_ind+1
+            if not jump:
+                new_paths.append(new_path)
+            else:
+                new_paths.append(path)
+        else:
+            new_paths.append(path)
+    return new_paths
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 NUM_EXPERIMENTS = 3
@@ -126,7 +189,8 @@ print("Finished search")
 if not isinstance(plan, SequentialPlan):
     plan = SequentialPlan()
 partial_order = plan.convert_to(unified_planning.plans.PlanKind.PARTIAL_ORDER_PLAN, task)
-max_depth, shortest_paths = retrieve_max_depth(partial_order._graph)
+max_depth, paths = retrieve_max_depth(partial_order._graph)
+partial_paths = paths_to_str(paths)
 
 print("Finished max depth search")
 
@@ -135,11 +199,7 @@ if args.partial:
 
 plan_actions = [str(item) for item in plan_actions]
 
-layered_actions = [list() for _ in range(max_depth+1)]
-
-for path in shortest_paths:
-    for key in path.keys():
-        layered_actions[path[key]].append(key.action.name)
+partial_paths = fix_paths_length(partial_paths, max_depth)
 
 e.encode(len(plan_actions))
 
@@ -149,7 +209,7 @@ print("Finished encoding")
 action_variables = get_set_action_variables(e)
 
 base_linear_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('linear',len(plan_actions), args.domain, args.problem)
-base_parallel_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('parallel',max_depth+1, args.domain, args.problem)
+base_parallel_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('parallel',max_depth, args.domain, args.problem)
 base_axiom_args = " -contrastive -axiom {} -first_action {}"
 optional_axiom_args = " -second_action {} -step {}"
 
@@ -190,10 +250,16 @@ for step in range(len(plan_actions)):
         if action1!=action2:
             axiom_linear_commands.append(base_linear_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
-for step in range(len(layered_actions)):
-    for action1 in layered_actions[step]:
+for step in range(max_depth):
+    step_actions = []
+    for path in partial_paths:
+        if len(path) == max_depth:
+            step_actions.append(path[step])
+        if len(path) == 1 and step == 0:
+            step_actions.append(path[0])
+    for action1 in step_actions:
         for action2 in action_variables:
-            if action1!=action2 and not (action2 in layered_actions[step]):
+            if action1!=action2 and not (action2 in step_actions):
                 axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
 if len(axiom_linear_commands) > 0:
@@ -214,11 +280,26 @@ for step in range(len(plan_actions)-1):
     if action1 != action2:
         axiom_linear_commands.append(base_linear_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step)) 
 
-for step in range(len(layered_actions)-1):
-    for action1 in layered_actions[step]:
-        for action2 in layered_actions[step+1]:
+single_action_path = []
+for path in partial_paths:
+    if len(path) == 1:
+        single_action_path.append(path[0])
+
+for path in partial_paths:
+    if len(path) == max_depth:
+        for step in range(max_depth-1):
+            action1 = path[step]
+            if action1 == None:
+                continue
+            action2 = path[step+1]
+            if action2 == None:
+                continue
             if action1!=action2:
                 axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action2, step))
+            else:
+                for action in single_action_path:
+                    if action!=action1:
+                        axiom_parallel_commands.append(base_parallel_command + base_axiom_args.format(4, action1) + optional_axiom_args.format(action, step))
 
 if len(axiom_linear_commands) > 0:
     linear_commands.extend(get_random_commands(axiom_linear_commands))
