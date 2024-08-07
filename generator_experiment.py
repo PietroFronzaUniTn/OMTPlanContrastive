@@ -129,6 +129,8 @@ def fix_paths_length(paths, max_depth):
             already_moved = False
             jump = False
             for action in path:
+                if curr_ind >= max_depth:
+                    break
                 index = -1
                 for pt in paths:
                     if len(pt) < max_depth:
@@ -155,6 +157,7 @@ def fix_paths_length(paths, max_depth):
                         already_moved = True
                     else:
                         jump = True
+                        break
                 else:
                     # If the current index is greater than the index of the action or is equal, simply put the action in the current index place
                     new_path[curr_ind] = action
@@ -200,6 +203,12 @@ if args.partial:
 plan_actions = [str(item) for item in plan_actions]
 
 partial_paths = fix_paths_length(partial_paths, max_depth)
+
+layered_actions = [[None] for _ in range(max_depth)]
+for path in partial_paths:
+    for step in range(len(path)):
+        if path[step] != None and step<max_depth:
+            layered_actions[step].append(path[step])
 
 e.encode(len(plan_actions))
 
@@ -250,13 +259,8 @@ for step in range(len(plan_actions)):
         if action1!=action2:
             axiom_linear_commands.append(base_linear_command + base_axiom_args.format(3, action1) + optional_axiom_args.format(action2, step))
 
-for step in range(max_depth):
-    step_actions = []
-    for path in partial_paths:
-        if len(path) == max_depth:
-            step_actions.append(path[step])
-        if len(path) == 1 and step == 0:
-            step_actions.append(path[0])
+for step in range(len(layered_actions)):
+    step_actions = layered_actions[step]
     for action1 in step_actions:
         for action2 in action_variables:
             if action1!=action2 and not (action2 in step_actions):
