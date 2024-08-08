@@ -118,6 +118,7 @@ def paths_to_str(paths):
         for a in pt:
             path.append(a.action.name)
         all_paths.append(path)
+    all_paths.sort(key=len, reverse=True)
     return all_paths
 
 def fix_paths_length(paths, max_depth):
@@ -135,7 +136,8 @@ def fix_paths_length(paths, max_depth):
                 for pt in paths:
                     if len(pt) < max_depth:
                         # search only in paths that is long originally max length
-                        continue
+                        # we break the loop since we ordered paths in such a way that the longest paths are first
+                        break
                     try:
                         index = pt.index(action)
                         # if index found break the cycle
@@ -148,6 +150,23 @@ def fix_paths_length(paths, max_depth):
                 if curr_ind<index:
                     # The index found is greater than the current index
                     if(not already_moved):
+                        # let's first check if the previous actions are present in other paths already fixed in positions smaller than the found index
+                        for prev_i in range(curr_ind):
+                            ind_found = -1
+                            for pt in new_paths:
+                                if len(pt) < max_depth:
+                                    break
+                                try:
+                                    ind_found = pt.index(new_path[prev_i])
+                                    # if index found break the cycle
+                                    break
+                                except ValueError:
+                                    continue
+                            if ind_found != -1 and ind_found < (index-curr_ind+prev_i):
+                                jump = True
+                                break
+                        if jump == True:
+                            break
                         # If we do not have moved already an action, we adjust the path to all actions closer together
                         new_path[index] = action
                         for i in range(curr_ind):
@@ -168,6 +187,7 @@ def fix_paths_length(paths, max_depth):
                 new_paths.append(path)
         else:
             new_paths.append(path)
+        new_paths.sort(key=len, reverse=True)
     return new_paths
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -204,10 +224,12 @@ plan_actions = [str(item) for item in plan_actions]
 
 partial_paths = fix_paths_length(partial_paths, max_depth)
 
-layered_actions = [[None] for _ in range(max_depth)]
+layered_actions = [[] for _ in range(max_depth)]
 for path in partial_paths:
     for step in range(len(path)):
-        if path[step] != None and step<max_depth:
+        if step >= max_depth:
+            break
+        if path[step] != None:
             layered_actions[step].append(path[step])
 
 e.encode(len(plan_actions))
