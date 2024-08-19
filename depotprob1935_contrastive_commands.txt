@@ -1,0 +1,75 @@
+================LINEAR EXPERIMENTS================
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action lift_hoist0_crate5_pallet0_distributor0"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action lift_hoist0_crate5_pallet0_distributor0
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drop_hoist2_crate4_crate5_depot0"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drop_hoist2_crate4_crate5_depot0
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drop_hoist2_crate4_crate0_distributor1"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drop_hoist2_crate4_crate0_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action load_hoist2_crate2_truck1_distributor1"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action load_hoist2_crate2_truck1_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action drive_truck0_depot0_distributor1"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action drive_truck0_depot0_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action unload_hoist2_crate5_truck0_distributor1"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action unload_hoist2_crate5_truck0_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate5_crate0_distributor1 -second_action drop_hoist1_crate5_pallet0_depot0 -step 40"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate5_crate0_distributor1 -second_action drop_hoist1_crate5_pallet0_depot0 -step 40
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate0_crate1_distributor1 -second_action lift_hoist1_crate5_crate0_depot0 -step 36"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate0_crate1_distributor1 -second_action lift_hoist1_crate5_crate0_depot0 -step 36
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action unload_hoist2_crate0_truck1_distributor1 -second_action drop_hoist1_crate2_pallet0_depot0 -step 35"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action unload_hoist2_crate0_truck1_distributor1 -second_action drop_hoist1_crate2_pallet0_depot0 -step 35
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action lift_hoist1_crate4_crate3_distributor0 -second_action drive_truck1_depot0_distributor0 -step 15"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action lift_hoist1_crate4_crate3_distributor0 -second_action drive_truck1_depot0_distributor0 -step 15
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action unload_hoist1_crate5_truck1_distributor0 -second_action drop_hoist1_crate5_crate0_distributor0 -step 20"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action unload_hoist1_crate5_truck1_distributor0 -second_action drop_hoist1_crate5_crate0_distributor0 -step 20
+------------------------
+echo "time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action unload_hoist2_crate0_truck1_distributor1 -second_action drop_hoist2_crate0_crate1_distributor1 -step 35"
+time python3 omtplan.py -smt -linear -translate 41 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action unload_hoist2_crate0_truck1_distributor1 -second_action drop_hoist2_crate0_crate1_distributor1 -step 35
+------------------------
+================PARALLEL EXPERIMENTS================
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drop_hoist2_crate5_crate1_distributor1"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drop_hoist2_crate5_crate1_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action lift_hoist1_crate3_crate5_distributor1"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action lift_hoist1_crate3_crate5_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drive_truck1_depot0_depot0"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 1 -first_action drive_truck1_depot0_depot0
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action drive_truck0_distributor1_distributor0"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action drive_truck0_distributor1_distributor0
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action drop_hoist2_crate5_crate0_distributor1"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action drop_hoist2_crate5_crate0_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action lift_hoist2_crate5_crate2_distributor1"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 2 -first_action lift_hoist2_crate5_crate2_distributor1
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate0_crate1_distributor1 -second_action lift_hoist1_crate0_crate2_depot0 -step 12"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate0_crate1_distributor1 -second_action lift_hoist1_crate0_crate2_depot0 -step 12
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate0_crate1_distributor1 -second_action lift_hoist0_crate4_pallet2_distributor0 -step 19"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action drop_hoist2_crate0_crate1_distributor1 -second_action lift_hoist0_crate4_pallet2_distributor0 -step 19
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action unload_hoist2_crate0_truck1_distributor1 -second_action load_hoist1_crate4_truck0_distributor1 -step 11"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 3 -first_action unload_hoist2_crate0_truck1_distributor1 -second_action load_hoist1_crate4_truck0_distributor1 -step 11
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action load_hoist0_crate1_truck0_depot0 -second_action unload_hoist0_crate2_truck1_depot0 -step 4"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action load_hoist0_crate1_truck0_depot0 -second_action unload_hoist0_crate2_truck1_depot0 -step 4
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action drive_truck1_distributor0_depot0 -second_action unload_hoist0_crate3_truck1_depot0 -step 11"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action drive_truck1_distributor0_depot0 -second_action unload_hoist0_crate3_truck1_depot0 -step 11
+------------------------
+echo "time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action load_hoist1_crate3_truck1_distributor0 -second_action unload_hoist1_crate5_truck1_distributor0 -step 9"
+time python3 omtplan.py -smt -parallel -translate 23 -domain ./pddl_examples/IPCs/classicalPlanning/depot/domain.pddl ./pddl_examples/IPCs/classicalPlanning/depot/instances/pfile3.pddl -contrastive -axiom 4 -first_action load_hoist1_crate3_truck1_distributor0 -second_action unload_hoist1_crate5_truck1_distributor0 -step 9

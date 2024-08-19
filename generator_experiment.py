@@ -45,16 +45,10 @@ def parse_args():
     
     return args
 
-def get_set_action_variables(encoder):
-    action_set= set()
-
-    for _, action in encoder.action_variables.items():
-        action_set.update(list(action.keys()))
-    return list(action_set)
-
-def get_plan_action(plan, encoder):
+def get_plan_action(plan, task, ground_actions, environment):  
     if not plan:
-        s = search.SearchSMT(encoder, 100)
+        e = encoder.EncoderSMT(task, modifier.LinearModifier())
+        s = search.SearchSMT(e, 100)
         r_plan = s.do_linear_search()
         if r_plan.validate():
             return r_plan.plan.actions, r_plan.plan
@@ -77,12 +71,11 @@ def get_plan_action(plan, encoder):
                     else:
                         action += "_"+action_line[i] 
                 plan_actions.append(action)
-            actions = e.getActionsList()
             for action in plan_actions:
-                for g_a in actions:
+                for g_a in ground_actions:
                     if g_a.name == action:
                         plan_list.append(ActionInstance(g_a))
-            r_plan = SequentialPlan(plan_list, e.ground_problem.environment)
+            r_plan = SequentialPlan(plan_list, environment)
         return plan_actions, r_plan
 
 def get_random_commands(command_list):
@@ -201,9 +194,17 @@ task = reader.parse_problem(args.domain, args.problem)
 
 problem_name = task.name
 
-e = encoder.EncoderSMT(task, modifier.LinearModifier())
+with Compiler(problem_kind=task.kind, compilation_kind=CompilationKind.GROUNDING) as grounder:
+    problem = grounder.compile(task, compilation_kind=CompilationKind.GROUNDING).problem
 
-plan_actions, plan = get_plan_action(args.plan, e)
+print("Finished grounding")
+
+ground_actions = problem.actions
+action_variables = []
+for action in ground_actions:
+    action_variables.append(action.name)
+
+plan_actions, plan = get_plan_action(args.plan, task, ground_actions, problem.environment)
 if len(plan_actions) == 0:
     raise Exception("Plan is not valid")
 
@@ -232,12 +233,7 @@ for path in partial_paths:
         if path[step] != None:
             layered_actions[step].append(path[step])
 
-e.encode(len(plan_actions))
-
-print("Finished encoding")
-
-# Get list of action variables
-action_variables = get_set_action_variables(e)
+print("Start experiment generation")
 
 base_linear_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('linear',len(plan_actions), args.domain, args.problem)
 base_parallel_command = "time python3 omtplan.py -smt -{} -translate {} -domain {} {}".format('parallel',max_depth, args.domain, args.problem)
