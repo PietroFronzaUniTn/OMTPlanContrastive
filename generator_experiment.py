@@ -178,9 +178,9 @@ def fix_paths_length(paths, max_depth):
                 new_paths.append(new_path)
             else:
                 new_paths.append(path)
+            new_paths.sort(key=len, reverse=True)
         else:
             new_paths.append(path)
-        new_paths.sort(key=len, reverse=True)
     return new_paths
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -227,11 +227,12 @@ partial_paths = fix_paths_length(partial_paths, max_depth)
 
 layered_actions = [[] for _ in range(max_depth)]
 for path in partial_paths:
-    for step in range(len(path)):
-        if step >= max_depth:
-            break
-        if path[step] != None:
-            layered_actions[step].append(path[step])
+    if len(path) == 1 or len(path) == max_depth:
+        for step in range(len(path)):
+            if step >= max_depth:
+                break
+            if path[step] != None:
+                layered_actions[step].append(path[step])
 
 print("Start experiment generation")
 
