@@ -225,14 +225,14 @@ plan_actions = [str(item) for item in plan_actions]
 
 partial_paths = fix_paths_length(partial_paths, max_depth)
 
-layered_actions = [[] for _ in range(max_depth)]
+layered_actions = [set() for _ in range(max_depth)]
 for path in partial_paths:
     if len(path) == 1 or len(path) == max_depth:
         for step in range(len(path)):
             if step >= max_depth:
                 break
             if path[step] != None:
-                layered_actions[step].append(path[step])
+                layered_actions[step].add(path[step])
 
 print("Start experiment generation")
 
