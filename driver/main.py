@@ -167,8 +167,8 @@ def main(BASE_DIR):
                         with Profiler(interval=0.1) as profiler:
                             if(fact_support!=0):
                                 foil_support = utils.model_counting(formula, action_variable_list, "foil")
-                                robustness = foil_support/fact_support
-                                print("Robustness measure: ", robustness)
+                                plausibility = foil_support/fact_support
+                                print("Plausibility measure: ", plausibility)
                             else:
                                 print("Something went wrong. Fact support is empty.")   
                         profiler.print()
@@ -176,8 +176,8 @@ def main(BASE_DIR):
                         fact_support = utils.model_counting(formula, action_variable_list, "fact")
                         if(fact_support!=0):
                             foil_support = utils.model_counting(formula, action_variable_list, "foil")
-                            robustness = foil_support/fact_support
-                            print("Robustness measure: ", robustness)
+                            plausibility = foil_support/fact_support
+                            print("Plausibility measure: ", plausibility)
                         else:
                             print("Something went wrong. Fact support is empty.")
                 else:
