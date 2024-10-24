@@ -15,7 +15,6 @@ import networkx as nx
 from unified_planning.plans import SequentialPlan
 from unified_planning.plans import PartialOrderPlan
 from unified_planning.plans import ActionInstance
-#from graphviz import Source
 from pprint import pprint
 from unified_planning.plot import plot_partial_order_plan
 

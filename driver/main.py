@@ -145,8 +145,6 @@ def main(BASE_DIR):
 
         # Build SMT-LIB encoding and dump (no solving)
         if args.translate:
-            #print(e._computeSerialMutexes())
-            #print(e._computeParallelMutexes())
             if args.profiling:
                 with Profiler(interval=0.1) as profiler:
                     formula = e.encode(args.translate)

@@ -577,10 +577,8 @@ def model_counting(formula, initial_variables, contrastive_type="fact"):
             global number_solution
             if sat == s.check():
                 number_solution = number_solution +1
-                #print(contrastive_type, number_solution)
                 m = s.model()
                 yield m
-                #print(m)
                 for i in range(len(terms)):
                     s.push()
                     block_term(s, m, terms[i])
@@ -605,7 +603,6 @@ def model_counting(formula, initial_variables, contrastive_type="fact"):
             solver.add(sub_formula)
     
     support = list(all_smt(solver, initial_variables))
-    #print(support)
     print("Size of {} support: ".format(contrastive_type), len(support))
     return len(support)
 
